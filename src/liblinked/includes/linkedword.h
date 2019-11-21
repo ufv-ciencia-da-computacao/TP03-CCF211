@@ -1,5 +1,5 @@
-#ifndef __WORD_H__
-#define __WORD_H__
+#ifndef __LINKED_WORD_H__
+#define __LINKED_WORD_H__
 
 #include <stdlib.h>
 
@@ -13,6 +13,7 @@ void LinkedWordInit(LinkedWord *lw);
 void LinkedWordInsert(LinkedWord *lw, char c);
 void LinkedWordRemove(LinkedWord *lw, char c);
 int  LinkedWordSize(LinkedWord lw);
+int  LinkedWordEquals(LinkedWord lw1, LinkedWord lw2);
 void LinkedWordToString(LinkedWord lw, char *str);
 
 #endif

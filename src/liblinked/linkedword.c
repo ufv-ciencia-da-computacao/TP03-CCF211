@@ -61,7 +61,21 @@ int  LinkedWordSize(LinkedWord lw) {
   return size;
 }
 
+int LinkedWordEquals(LinkedWord lw1, LinkedWord lw2) {
+  if(!LinkedWordSize(lw1) || !LinkedWordSize(lw2)) return 0;
+  LinkedWord iterator1 = lw1, iterator2 = lw2;
+  while(1) {
+    if(iterator1 == NULL && iterator2 == NULL) return 1;
+    if(iterator1 != NULL && iterator2 != NULL && iterator1->c == iterator2->c) {
+      iterator1 = iterator1->next;
+      iterator2 = iterator2->next;
+    } else {
+      return 0;
+    }
+  }
+  return 1;
+}
+
 void LinkedWordToString(LinkedWord lw, char *str) {
   
 }
-
