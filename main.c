@@ -5,20 +5,26 @@ int main() {
 
   LinkedWord lw;
   LinkedWordInit(&lw);
-  LinkedWordInsert(&lw, 'd');
-  LinkedWordInsert(&lw, 'e');
-  LinkedWordInsert(&lw, 'n');
-  LinkedWordInsert(&lw, 'e');
-  LinkedWordInsert(&lw, 'r');
-  LinkedWordRemove(&lw, 'd');
-  LinkedWordRemove(&lw, 'e');
+  int i;
+
+  for(i=0; i<26; i++) {
+    LinkedWordInsert(&lw, 'a' + i/4);
+  }
+  
+  printf("size: %d\n", LinkedWordSize(lw));
+  
+  LinkedWordRemove(&lw, 'a');
+  LinkedWordRemove(&lw, 'a');
+
+  printf("size: %d\n", LinkedWordSize(lw));
 
   LinkedWord iterator = lw;
   while(iterator != NULL) {
-    printf("%c\n", iterator->c);
+    printf("%c ", iterator->c);
     iterator = iterator->next;
   }
 
+  printf("\n");
 
   return 0;
 }

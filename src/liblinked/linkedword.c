@@ -52,10 +52,16 @@ void LinkedWordRemove(LinkedWord *lw, char c) {
 
 int  LinkedWordSize(LinkedWord lw) {
   if(isEmpty(lw)) return 0;
-  else return 1 + LinkedWordSize(lw->next);
+  LinkedWord iterator = lw;
+  int size = 0;
+  while(iterator != NULL) {
+    size++;
+    iterator = iterator->next;
+  }
+  return size;
 }
 
 void LinkedWordToString(LinkedWord lw, char *str) {
-
+  
 }
 
