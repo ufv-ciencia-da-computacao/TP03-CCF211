@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "src/liblinked/linkedword.h"
+#include "src/liblinked/includes/linkedword.h"
 
 int main() {
 

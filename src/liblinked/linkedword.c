@@ -1,4 +1,4 @@
-#include "linkedword.h"
+#include "includes/linkedword.h"
 
 static int isEmpty(LinkedWord lw) {
   return lw == NULL;
