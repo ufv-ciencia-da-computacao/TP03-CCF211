@@ -31,23 +31,22 @@ void LinkedTextInsert(LinkedText *lt, LinkedWord lw) {
   }
 }
 
-void LinkedTextRemove(LinkedText *lt, LinkedWord lw) {
+void LinkedTextRemove(LinkedText *lt, int index) {
   if(isEmpty(*lt)) return; 
-  LinkedText iterator = *lt, prev = NULL, remove;
-  while(iterator != NULL) {
-    if(LinkedWordEquals(iterator->lw, lw)) {
-      if(prev == NULL) {
-        *lt = iterator->next;
-      } else {
-        prev->next = iterator->next;
-      }
-      remove = iterator;
-      iterator = iterator->next;
-      nodeFree(remove);
-      continue;
-    }
+  LinkedText iterator = *lt, prev = NULL;
+  int i;
+  for(i=0; i<index; i++) {
+    if(iterator == NULL) break;
     prev = iterator;
     iterator = iterator->next;
+  }
+  if(i == index) {
+    if(prev == NULL) {
+      *lt = iterator->next;
+    } else {
+      prev->next = iterator->next;
+    }
+    nodeFree(iterator);
   }
 }
 

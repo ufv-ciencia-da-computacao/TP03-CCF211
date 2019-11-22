@@ -11,7 +11,7 @@ struct word_t {
 
 void LinkedWordInit(LinkedWord *lw);
 void LinkedWordInsert(LinkedWord *lw, char c);
-void LinkedWordRemove(LinkedWord *lw, char c);
+void LinkedWordRemove(LinkedWord *lw, int index);
 int  LinkedWordSize(LinkedWord lw);
 int  LinkedWordEquals(LinkedWord lw1, LinkedWord lw2);
 void LinkedWordToString(LinkedWord lw, char *str);

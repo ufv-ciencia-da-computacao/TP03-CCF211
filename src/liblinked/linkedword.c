@@ -30,23 +30,22 @@ void LinkedWordInsert(LinkedWord *lw, char c) {
   }
 }
 
-void LinkedWordRemove(LinkedWord *lw, char c) {
+void LinkedWordRemove(LinkedWord *lw, int index) {
   if(isEmpty(*lw)) return; 
-  LinkedWord iterator = *lw, prev = NULL, remove;
-  while(iterator != NULL) {
-    if(iterator->c == c) {
-      if(prev == NULL) {
-        *lw = iterator->next;
-      } else {
-        prev->next = iterator->next;
-      }
-      remove = iterator;
-      iterator = iterator->next;
-      nodeFree(remove);
-      continue;
-    }
+  LinkedWord iterator = *lw, prev = NULL;
+  int i;
+  for(i=0; i<index; i++) {
+    if(iterator == NULL) break;
     prev = iterator;
     iterator = iterator->next;
+  }
+  if(i == index) {
+    if(prev == NULL) {
+      *lw = iterator->next;
+    } else {
+      prev->next = iterator->next;
+    }
+    nodeFree(iterator);
   }
 }
 
