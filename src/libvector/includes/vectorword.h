@@ -5,16 +5,18 @@
 #include <stdlib.h>
 
 #define MAXTAM 100000
+#include <stdbool.h>
+#include <string.h>
 
 typedef struct vectorword_t {
   char character[MAXTAM];
-  int tail, head;
+  int size;
 } Word;
 
 void wordInit(Word *word);
-void wordInsertChar(Word *word, char c);
-void wordDeleteChar(Word *word, char searched, char *deleted);
-void wordToString(Word *word);
-void wordFree(Word *word);
+int wordInsertChar(Word *word, char c);
+int wordDeleteChar(Word *word, int searched, char *deleted);
+bool isEmpty(Word *word);
+void wordToString(Word *word, char *str);
 
 #endif

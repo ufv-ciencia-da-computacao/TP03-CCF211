@@ -6,14 +6,14 @@
 #include <stdlib.h>
 
 typedef struct vectortext_t {
-  vectorword_t words[MAXTAM];
-  int tail, head;
+  Word words[MAXTAM];
+  int size;
 } Text;
 
 void textInit(Text *text);
-void textInsertWord(Text *text, Word word);
-void textDeleteWord(Text *text, Word searched, Word *deleted);
-void textToString(Text *text);
-void textFree(Text *text);
+int textInsertWord(Text *text, Word word);
+int textDeleteWord(Text *text, int searched, Word *deleted);
+bool textIsEmpty(Text *text);
+void textToString(Text *text, char *str);
 
 #endif

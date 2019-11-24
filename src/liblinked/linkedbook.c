@@ -1,4 +1,4 @@
-#include "includes/LinkedBook.h"
+#include "includes/linkedbook.h"
 
 static int isEmpty(LinkedBook lb) {
   return lb == NULL;

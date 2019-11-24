@@ -6,14 +6,14 @@
 #include <stdlib.h>
 
 typedef struct vectorbook_t {
-  vectortext_t texts[MAXTAM];
-  int tail, head;
+  Text texts[MAXTAM];
+  int size;
 } Book;
 
-void bookInit(Book *books);
-void bookInsertWord(Book *books, Text text);
-void bookDeleteWord(Book *books, Word searched, Word *deleted);
-void bookToString(Book *books);
-void bookFree(Book *books);
+void bookInit(Book *book);
+void bookInsertWord(Book *book, Text text);
+void bookDeleteWord(Book *book, int searched, Word *deleted);
+void bookToString(Book *book, char *str);
+void bookFree(Book *book);
 
 #endif
