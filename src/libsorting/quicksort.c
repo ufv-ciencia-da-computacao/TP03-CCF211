@@ -78,8 +78,8 @@ void _partitionLinkedText(LinkedText *linkedText, int l, int r, int *i, int *j) 
   LinkedWord pivo = LinkedTextGetWord(linkedText, ((*i + *j)/2));
 
   do {
-    while (pivo->c > LinkedTextGetWord(linkedText, *i)->c) (*i)++;
-    while (pivo->c < LinkedTextGetWord(linkedText, *j)->c) (*j)--;
+    while (tolower(pivo->c) > tolower(LinkedTextGetWord(linkedText, *i)->c)) (*i)++;
+    while (tolower(pivo->c) < tolower(LinkedTextGetWord(linkedText, *j)->c)) (*j)--;
     
     if (*i <= *j) {
       LinkedWord aux = LinkedTextGetWord(linkedText, *i);
