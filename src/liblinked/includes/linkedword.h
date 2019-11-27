@@ -2,6 +2,7 @@
 #define __LINKED_WORD_H__
 
 #include <stdlib.h>
+#include <stdio.h>
 
 typedef struct word_t * LinkedWord;
 struct word_t {
@@ -15,6 +16,6 @@ void LinkedWordRemove(LinkedWord *lw, int index);
 int  LinkedWordSize(LinkedWord lw);
 int  LinkedWordBytes(LinkedWord lw);
 int  LinkedWordEquals(LinkedWord lw1, LinkedWord lw2);
-void LinkedWordToString(LinkedWord lw, char **str);
+void LinkedWordPrint(LinkedWord lw, FILE *stream);
 
 #endif

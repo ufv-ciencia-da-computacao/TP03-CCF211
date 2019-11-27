@@ -4,10 +4,11 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
+#include <stdio.h>
 
 void randomInit();
-void randomWord(char **str, int length);
-void randomText(char **str, int words, int maxWordLen);
-void randomBook(char **str, int texts, int words, int maxWordLen);
+void randomWord(FILE *stream, int length);
+void randomText(FILE *stream, int words, int maxWordLen);
+void randomBook(FILE *stream, int texts, int words, int maxWordLen);
 
 #endif

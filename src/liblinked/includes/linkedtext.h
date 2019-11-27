@@ -2,6 +2,7 @@
 #define __LINKED_TEXT_H__
 
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
 #include "linkedword.h"
 
@@ -17,6 +18,6 @@ void LinkedTextRemove(LinkedText *lt, int index);
 LinkedWord LinkedTextGetWord(LinkedText *lt, int index);
 int  LinkedTextSize(LinkedText lt);
 int  LinkedTextBytes(LinkedText lt);
-void LinkedTextToString(LinkedText lt, char **str);
+void LinkedTextPrint(LinkedText lt, FILE *stream);
 
 #endif

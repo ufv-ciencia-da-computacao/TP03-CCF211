@@ -2,6 +2,8 @@
 #define __LINKED_BOOK_H__
 
 #include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 #include "linkedtext.h"
 
 typedef struct book_t * LinkedBook;
@@ -16,6 +18,6 @@ void LinkedBookRemove(LinkedBook *lb, int index);
 LinkedText LinkedBookGetText(LinkedBook *lb, int index);
 int  LinkedBookSize(LinkedBook lb);
 int  LinkedBookBytes(LinkedBook lb);
-void LinkedBookToString(LinkedBook lb, char **str);
+void LinkedBookPrint(LinkedBook lb, FILE *stream);
 
 #endif

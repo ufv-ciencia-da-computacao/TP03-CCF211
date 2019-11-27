@@ -85,16 +85,11 @@ int LinkedTextBytes(LinkedText lt) {
   return size;
 }
 
-void LinkedTextToString(LinkedText lt, char **str) {
-  int size = LinkedTextBytes(lt) + (LinkedTextSize(lt) + 1) * sizeof(char);
+void LinkedTextPrint(LinkedText lt, FILE *stream) {
   LinkedText iterator = lt;
-  char *word;
-  *str = (char *) calloc(size, 1);
   while(iterator != NULL) {
-    LinkedWordToString(iterator->lw, &word);
-    strcat(*str, word);
-    free(word);
-    strcat(*str, " ");
+    LinkedWordPrint(iterator->lw, stream);
+    fprintf(stream, iterator->next != NULL ? " " : "");
     iterator = iterator->next;
   }
 }

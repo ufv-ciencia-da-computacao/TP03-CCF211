@@ -71,16 +71,11 @@ int  LinkedBookBytes(LinkedBook lb) {
   return size;
 }
 
-void LinkedBookToString(LinkedBook lb, char **str) {
-  int size = LinkedBookBytes(lb) + (LinkedBookSize(lb) + 1) * sizeof(char);
+void LinkedBookPrint(LinkedBook lb, FILE *stream) {
   LinkedBook iterator = lb;
-  char *text;
-  *str = (char *) calloc(size, 1);
   while(iterator != NULL) {
-    LinkedTextToString(iterator->lt, &text);
-    strcat(*str, text);
-    free(text);
-    strcat(*str, "\n");
+    LinkedTextPrint(iterator->lt, stream);
+    fprintf(stream, "\n");
     iterator = iterator->next;
   }
 }

@@ -79,13 +79,10 @@ int LinkedWordEquals(LinkedWord lw1, LinkedWord lw2) {
   return 1;
 }
 
-void LinkedWordToString(LinkedWord lw, char **str) {
-  int i=0;
+void LinkedWordPrint(LinkedWord lw, FILE *stream) {
   LinkedWord iterator = lw;
-  *str = (char *) calloc(LinkedWordBytes(lw), 1);
   while (iterator != NULL) {
-    (*str)[i] = iterator->c;
+    fprintf(stream, "%c", iterator->c);
     iterator = iterator->next;
-    i++;
   }
 }
