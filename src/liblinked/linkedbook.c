@@ -1,4 +1,4 @@
-#include "includes/LinkedBook.h"
+#include "includes/linkedbook.h"
 
 static int isEmpty(LinkedBook lb) {
   return lb == NULL;
@@ -61,7 +61,27 @@ int  LinkedBookSize(LinkedBook lb) {
   return size;
 }
 
-void LinkedBookToString(LinkedBook lb, char *str) {
-  
+int  LinkedBookBytes(LinkedBook lb) {
+  int size = 0;
+  LinkedBook iterator = lb;
+  while(iterator != NULL) {
+    size += LinkedTextBytes(iterator->lt);
+    iterator = iterator->next;
+  }
+  return size;
+}
+
+void LinkedBookToString(LinkedBook lb, char **str) {
+  int size = LinkedBookBytes(lb) + (LinkedBookSize(lb) + 1) * sizeof(char);
+  LinkedBook iterator = lb;
+  char *text;
+  *str = (char *) calloc(size, 1);
+  while(iterator != NULL) {
+    LinkedTextToString(iterator->lt, &text);
+    strcat(*str, text);
+    free(text);
+    strcat(*str, "\n");
+    iterator = iterator->next;
+  }
 }
 
