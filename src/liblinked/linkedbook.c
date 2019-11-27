@@ -83,5 +83,19 @@ void LinkedBookToString(LinkedBook lb, char **str) {
     strcat(*str, "\n");
     iterator = iterator->next;
   }
-}
 
+
+LinkedText LinkedBookGetText(LinkedBook *lb, int index) {
+  LinkedBook iterator = *lb;
+  int count = 0;
+  
+  while (iterator != NULL) {
+    if (count == index) {
+      return iterator->lt;
+    }
+    count++;
+    iterator = iterator->next;
+  }
+
+  return NULL;
+}

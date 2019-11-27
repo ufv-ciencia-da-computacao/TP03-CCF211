@@ -13,6 +13,7 @@ struct book_t {
 void LinkedBookInit(LinkedBook *lb);
 void LinkedBookInsert(LinkedBook *lb, LinkedText lt);
 void LinkedBookRemove(LinkedBook *lb, int index);
+LinkedText LinkedBookGetText(LinkedBook *lb, int index);
 int  LinkedBookSize(LinkedBook lb);
 int  LinkedBookBytes(LinkedBook lb);
 void LinkedBookToString(LinkedBook lb, char **str);
