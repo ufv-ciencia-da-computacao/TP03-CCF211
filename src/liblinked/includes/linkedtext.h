@@ -13,6 +13,7 @@ struct text_t {
 void LinkedTextInit(LinkedText *lt);
 void LinkedTextInsert(LinkedText *lt, LinkedWord lw);
 void LinkedTextRemove(LinkedText *lt, int index);
+LinkedWord LinkedTextGetWord(LinkedText *lt, int index);
 int  LinkedTextSize(LinkedText lt);
 void LinkedTextToString(LinkedText lt, char *str);
 

@@ -61,6 +61,19 @@ int  LinkedBookSize(LinkedBook lb) {
   return size;
 }
 
+LinkedText LinkedBookGetText(LinkedBook *lb, int index) {
+  LinkedBook iterator = *lb;
+  int count = 0;
+  
+  while (iterator != NULL) {
+    if (count == index) {
+      return iterator->lt;
+    }
+    count++;
+    iterator = iterator->next;
+  }
+}
+
 void LinkedBookToString(LinkedBook lb, char *str) {
   
 }
