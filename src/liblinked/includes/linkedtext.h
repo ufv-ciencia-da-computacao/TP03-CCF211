@@ -2,6 +2,7 @@
 #define __LINKED_TEXT_H__
 
 #include <stdlib.h>
+#include <string.h>
 #include "linkedword.h"
 
 typedef struct text_t * LinkedText;
@@ -14,6 +15,7 @@ void LinkedTextInit(LinkedText *lt);
 void LinkedTextInsert(LinkedText *lt, LinkedWord lw);
 void LinkedTextRemove(LinkedText *lt, int index);
 int  LinkedTextSize(LinkedText lt);
-void LinkedTextToString(LinkedText lt, char *str);
+int  LinkedTextBytes(LinkedText lt);
+void LinkedTextToString(LinkedText lt, char **str);
 
 #endif
