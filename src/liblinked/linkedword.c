@@ -60,6 +60,10 @@ int  LinkedWordSize(LinkedWord lw) {
   return size;
 }
 
+int  LinkedWordBytes(LinkedWord lw) {
+  return (LinkedWordSize(lw) + 1) * sizeof(char);
+}
+
 int LinkedWordEquals(LinkedWord lw1, LinkedWord lw2) {
   if(!LinkedWordSize(lw1) || !LinkedWordSize(lw2)) return 0;
   LinkedWord iterator1 = lw1, iterator2 = lw2;
@@ -75,6 +79,13 @@ int LinkedWordEquals(LinkedWord lw1, LinkedWord lw2) {
   return 1;
 }
 
-void LinkedWordToString(LinkedWord lw, char *str) {
-  
+void LinkedWordToString(LinkedWord lw, char **str) {
+  int i=0;
+  LinkedWord iterator = lw;
+  *str = (char *) calloc(LinkedWordBytes(lw), 1);
+  while (iterator != NULL) {
+    (*str)[i] = iterator->c;
+    iterator = iterator->next;
+    i++;
+  }
 }
