@@ -8,7 +8,7 @@
 
 void randomInit();
 void randomWord(FILE *stream, int length);
-void randomText(FILE *stream, int words, int maxWordLen);
-void randomBook(FILE *stream, int texts, int words, int maxWordLen);
+void randomText(FILE *stream, int length, int maxWordLen);
+void randomBook(FILE *stream, int texts, int length, int maxWordLen);
 
 #endif
