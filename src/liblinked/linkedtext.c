@@ -50,8 +50,8 @@ void LinkedTextRemove(LinkedText *lt, int index) {
   }
 }
 
-LinkedWord LinkedTextGetWord(LinkedText *lt, int index) {
-  LinkedText iterator = *lt;
+LinkedWord LinkedTextGetWord(LinkedText lt, int index) {
+  LinkedText iterator = lt;
   int count = 0;
   
   while (iterator != NULL) {
@@ -70,16 +70,6 @@ int  LinkedTextSize(LinkedText lt) {
   int size = 0;
   while(iterator != NULL) {
     size++;
-    iterator = iterator->next;
-  }
-  return size;
-}
-
-int LinkedTextBytes(LinkedText lt) {
-  int size = 0;
-  LinkedText iterator = lt;
-  while(iterator != NULL) {
-    size += LinkedWordBytes(iterator->lw);
     iterator = iterator->next;
   }
   return size;

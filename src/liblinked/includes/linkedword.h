@@ -14,8 +14,6 @@ void LinkedWordInit(LinkedWord *lw);
 void LinkedWordInsert(LinkedWord *lw, char c);
 void LinkedWordRemove(LinkedWord *lw, int index);
 int  LinkedWordSize(LinkedWord lw);
-int  LinkedWordBytes(LinkedWord lw);
-int  LinkedWordEquals(LinkedWord lw1, LinkedWord lw2);
 void LinkedWordPrint(LinkedWord lw, FILE *stream);
 
 #endif
