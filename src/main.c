@@ -1,6 +1,5 @@
 #include <stdio.h>
-#include "liblinked/includes/linkedword.h"
-#include "liblinked/includes/linkedtext.h"
+#include "liblinked/includes/linkedbook.h"
 
 int main() {
 
@@ -11,26 +10,32 @@ int main() {
   LinkedText lt;
   LinkedTextInit(&lt);
 
+  LinkedBook lb;
+  LinkedBookInit(&lb);
+
   int i;
 
   for(i=0; i<26; i++) {
     LinkedWordInsert(&lw, 'a' + i);
-    LinkedWordInsert(&lw1, 'z'- i);
+    LinkedWordInsert(&lw1, 'z' - i);
   }
-
-  LinkedWordRemove(&lw, 0);
-  LinkedWordRemove(&lw, 1);
-  LinkedWordRemove(&lw, 2);
-  LinkedWordRemove(&lw, 3);
-  LinkedWordRemove(&lw, 4);
-
 
   LinkedTextInsert(&lt, lw);
   LinkedTextInsert(&lt, lw1);
 
-  LinkedTextRemove(&lt, 0);
 
-  printf("%d\n", LinkedTextSize(lt));
+  LinkedBookInsert(&lb, lt);
+  
+  LinkedTextInsert(&lt, lw);
+  
+  LinkedBookInsert(&lb, lt);
+
+  char *str;
+  LinkedBookToString(lb, &str);
+
+  printf("%s.\n", str);
+
+  free(str);
 
   return 0;
 }
