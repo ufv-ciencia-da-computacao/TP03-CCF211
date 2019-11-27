@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "liblinked/includes/linkedbook.h"
+#include "libtest/includes/test.h"
 
 int main() {
 
@@ -31,7 +32,8 @@ int main() {
   LinkedBookInsert(&lb, lt);
 
   char *str;
-  LinkedBookToString(lb, &str);
+  randomInit();
+  randomBook(&str, 100, 10000, 10);
 
   printf("%s.\n", str);
 
