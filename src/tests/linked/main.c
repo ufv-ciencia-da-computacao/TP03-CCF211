@@ -1,36 +1,34 @@
 #include <stdio.h>
-#include "libvector/includes/vectorbook.h"
+#include "../../liblinked/includes/linkedtext.h"
 
 int main() {
 
-  Word w;
-  wordInit(&w);
+  LinkedWord lw;
+  LinkedText lt;
+  LinkedTextInit(&lt);
 
-  wordInsertChar(&w, 'a');
-  wordInsertChar(&w, 'b');
-  wordInsertChar(&w, 'd');
-  wordInsertChar(&w, 'c');
+  LinkedWordInit(&lw);
+  LinkedWordInsert(&lw, 'a');
+  LinkedWordInsert(&lw, 'b');
+  LinkedWordInsert(&lw, 'c');
+  LinkedTextInsert(&lt, lw);
 
-  Text t;
-  textInit(&t);
+  LinkedWordInit(&lw);
+  LinkedWordInsert(&lw, 'c');
+  LinkedWordInsert(&lw, 'b');
+  LinkedWordInsert(&lw, 'a');
+  LinkedTextInsert(&lt, lw);
 
-  textInsertWord(&t, w);
-  textInsertWord(&t, w);
-  textInsertWord(&t, w);
+  LinkedWordInit(&lw);
+  LinkedWordInsert(&lw, 'c');
+  LinkedWordInsert(&lw, 'a');
+  LinkedWordInsert(&lw, 'b');
+  LinkedTextInsert(&lt, lw);
 
-  Book b;
-  bookInit(&b);
-
-  bookInsertWord(&b, t);
-  bookInsertWord(&b, t);
-  bookInsertWord(&b, t);
-  bookInsertWord(&b, t);
-  bookInsertWord(&b, t);
-
+  LinkedTextSwap(&lt, 2, 1);
 
 
-  bookPrint(stdout, b);
-
+  LinkedTextPrint(stdout, lt);
 
   return 0;
 }

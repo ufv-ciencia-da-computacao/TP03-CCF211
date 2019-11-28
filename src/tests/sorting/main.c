@@ -16,22 +16,22 @@ int main() {
 
   srand(time(0));
 
-  int i, j, k;
+  int i, j, k, _i, _j;
 
-  for(i=rand()%10; i>=0; i--) {
+  for(i=rand()%10, _i=i; i>=0; i--) {
     textInit(&t);
-    for(j=rand()%10; j>=0; j--) {
+    for(j=rand()%10, _j=j; j>=0; j--) {
       wordInit(&w);
       for(k=rand()%10; k>=0; k--) {
         wordInsertChar(&w, (char)(rand() % 26 + 'A'));
       }
       textInsertWord(&t, w);
     }
-    vectorTextSelectionSort(&t);
+    quickSortVectorText(&t, 0, _j);
     bookInsertText(&b, t);
   }
 
-  vectorBookSelectionSort(&b);
+  quickSortVectorBook(&b, 0, _i);
   bookPrint(stdout, b);
 
   return 0;
