@@ -5,15 +5,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define MAXTAM_TEXT 100
+
 typedef struct vectortext_t {
-  Word words[MAXTAM];
+  Word words[MAXTAM_TEXT];
   int size;
 } Text;
 
 void textInit(Text *text);
 int textInsertWord(Text *text, Word word);
 int textDeleteWord(Text *text, int searched, Word *deleted);
-bool textIsEmpty(Text *text);
-void textToString(Text *text, char *str);
+int textSize(Text text);
+void textPrint(FILE *stream, Text text);
 
 #endif

@@ -5,20 +5,21 @@ void wordInit(Word *word) {
 }
 
 int wordInsertChar(Word *word, char c) {
-  if (word->size == MAXTAM) {
+  if (word->size == MAXTAM_WORD) {
     return -1;
   } else {
     word->character[word->size++] = c;
-  }  
+  }
 
   return 0;
 }
 
 int wordDeleteChar(Word *word, int searched, char *deleted) {
   int indexSearched = -1;
-  for (int i = 0; i < word->size; i++) {
+  int i;
+  for (i = 0; i < word->size; i++) {
     if (i == searched) {
-      deleted = word->character[i];
+      *deleted = word->character[i];
       indexSearched = i;
       break;
     }
@@ -27,23 +28,22 @@ int wordDeleteChar(Word *word, int searched, char *deleted) {
   if (indexSearched == -1) {
     return -1;
   } else {
-    for (int i = indexSearched+1; i < word->size; i++) {
+    for (i = indexSearched+1; i < word->size; i++) {
       word->character[i-1] = word->character[i];
     }
   }
+  word->size--;
   
   return 1;
 }
 
-bool wordIsEmpty(Word *word) {
-  if (word->size == 0) {
-    return true;
-  }
-  return false;
+int wordSize(Word word) {
+  return word.size;
 }
 
-void wordToString(Word *word, char *str) {
-  for (int i = 0; i < word->size; i++) {
-    strcat(str, word->character[i]);
+void wordPrint(FILE *stream, Word word) {
+  int i;
+  for(i=0; i<word.size; i++) {
+    fprintf(stream, "%c", word.character[i]);
   }
 }

@@ -4,11 +4,11 @@ void bookInit(Book *book) {
   book->size = 0;
 }
 
-int bookInsertText(Book *book, Text t) {
-  if (book->size == MAXTAM) {
+int bookInsertText(Book *book, Text text) {
+  if (book->size == MAXTAM_BOOK) {
     return -1;
   } else {
-    book->texts[book->size++] = t;
+    book->texts[book->size++] = text;
   }  
 
   return 0;
@@ -16,7 +16,8 @@ int bookInsertText(Book *book, Text t) {
 
 int bookDeleteText(Book *book, int searched, Text *deleted) {
   int indexSearched = -1;
-  for (int i = 0; i < book->size; i++) {
+  int i;
+  for (i = 0; i < book->size; i++) {
     if (i == searched) {
       *deleted = book->texts[i];
       indexSearched = i;
@@ -26,24 +27,24 @@ int bookDeleteText(Book *book, int searched, Text *deleted) {
   if (indexSearched == -1) {
     return -1;
   } else {
-    for (int i = indexSearched+1; i < book->size; i++) {
+    for (i = indexSearched+1; i < book->size; i++) {
       book->texts[i-1] = book->texts[i];
     }
   }
+
+  book->size--;
   
   return 1;
 }
 
-bool bookIsEmpty(Book *book) {
-  if (book->size == 0) {
-    return true;
-  }
-  return false;
+int  bookSize(Book book) {
+  return book.size;
 }
 
-void bookToString(Book *book, char *str) {
-  for (int i = 0; i < book->size; i++) {
-    textToString(&(book->texts[i]), str);
-    strcat(str, " ");
+void bookPrint(FILE *stream, Book book) {
+  int i;
+  for (i = 0; i < book.size; i++) {
+    textPrint(stream, book.texts[i]);
+    fprintf(stream, i != book.size-1 ? "\n" : "");
   }
 }
