@@ -12,10 +12,14 @@
 #include "../../liblinked/includes/linkedtext.h"
 #include "../../liblinked/includes/linkedword.h"
 
-void _partitionBookVector(Book *arr, int l, int r, int *i, int *j);
+/* void _partitionBookVector(Book *arr, int l, int r, int *i, int *j);
 void _partitionTextVector(Text *arr, int l, int r, int *i, int *j);
 void _partitionLinkedBook(LinkedBook *linkedBook, int l, int r, int *i, int *j);
 void _partitionLinkedText(LinkedText *linkedText, int l, int r, int *i, int *j);
-void quickSort(void **arr, int l, int r, void (*partition)(void**, int, int, int*, int*));
+*/
+void quickSortVectorBook(Book *book, int l, int r);
+void quickSortVectorText(Text *text, int l, int r);
+void quickSortLinkedBook(LinkedBook *lb, int l, int r);
+void quickSortLinkedText(LinkedText *lt, int l, int r);
 
 #endif

@@ -1,6 +1,6 @@
 #include "./includes/quicksort.h"
 
-void _partitionBookVector(Book *arr, int l, int r, int *i, int *j) {
+static void _partitionBookVector(Book *arr, int l, int r, int *i, int *j) {
   *i = l;
   *j = r;
 
@@ -23,7 +23,7 @@ void _partitionBookVector(Book *arr, int l, int r, int *i, int *j) {
 
 }
 
-void _partitionTextVector(Text *arr, int l, int r, int *i, int *j) {
+static void _partitionTextVector(Text *arr, int l, int r, int *i, int *j) {
   *i = l;
   *j = r;
 
@@ -45,24 +45,18 @@ void _partitionTextVector(Text *arr, int l, int r, int *i, int *j) {
   } while (*i <= *j);
 }
 
-void _partitionLinkedBook(LinkedBook *linkedBook, int l, int r, int *i, int *j) {
+static void _partitionLinkedBook(LinkedBook *linkedBook, int l, int r, int *i, int *j) {
   *i = l;
   *j = r;
 
-  LinkedText pivo = LinkedBookGetText(*linkedBook, ((*i + *j)/2));
+  LinkedText pivo = LinkedBookGet(*linkedBook, ((*i + *j)/2))->lt;
 
   do {
-    while (LinkedTextSize(pivo) > LinkedTextSize(LinkedBookGetText(*linkedBook, *i))) (*i)++;
-    while (LinkedTextSize(pivo) < LinkedTextSize(LinkedBookGetText(*linkedBook, *j))) (*j)--;
+    while (LinkedTextSize(pivo) > LinkedTextSize(LinkedBookGet(*linkedBook, *i)->lt)) (*i)++;
+    while (LinkedTextSize(pivo) < LinkedTextSize(LinkedBookGet(*linkedBook, *j)->lt)) (*j)--;
     
     if (*i <= *j) {
-      LinkedText aux = LinkedBookGetText(*linkedBook, *i);
-
-      LinkedText textI = LinkedBookGetText(*linkedBook, *i);
-      LinkedText textJ = LinkedBookGetText(*linkedBook, *j);
-
-      textI = textJ;
-      textJ = aux;
+      LinkedBookSwap(linkedBook, *i, *j);
 
       (*i)++;
       (*j)--;
@@ -71,24 +65,18 @@ void _partitionLinkedBook(LinkedBook *linkedBook, int l, int r, int *i, int *j) 
   } while (*i <= *j);
 }
 
-void _partitionLinkedText(LinkedText *linkedText, int l, int r, int *i, int *j) {
+static void _partitionLinkedText(LinkedText *linkedText, int l, int r, int *i, int *j) {
   *i = l;
   *j = r;
 
-  LinkedWord pivo = LinkedTextGetWord(*linkedText, ((*i + *j)/2));
+  LinkedWord pivo = LinkedTextGet(*linkedText, ((*i + *j)/2))->lw;
 
   do {
-    while (tolower(pivo->c) > tolower(LinkedTextGetWord(*linkedText, *i)->c)) (*i)++;
-    while (tolower(pivo->c) < tolower(LinkedTextGetWord(*linkedText, *j)->c)) (*j)--;
+    while (tolower(pivo->c) > tolower(LinkedTextGet(*linkedText, *i)->lw->c)) (*i)++;
+    while (tolower(pivo->c) < tolower(LinkedTextGet(*linkedText, *j)->lw->c)) (*j)--;
     
     if (*i <= *j) {
-      LinkedWord aux = LinkedTextGetWord(*linkedText, *i);
-
-      LinkedWord wordI = LinkedTextGetWord(*linkedText, *i);
-      LinkedWord wordJ = LinkedTextGetWord(*linkedText, *j);
-
-      wordI = wordJ;
-      wordJ = aux;
+      LinkedTextSwap(linkedText, *i, *j);
 
       (*i)++;
       (*j)--;
@@ -97,9 +85,30 @@ void _partitionLinkedText(LinkedText *linkedText, int l, int r, int *i, int *j) 
   } while (*i <= *j);
 }
 
-void quickSort(void **arr, int l, int r, void (*partition)(void**, int, int, int*, int*)) {
+void quickSortVectorBook(Book *book, int l, int r) {
   int i, j;
-  partition(arr, l, r, &i, &j);
-  if (l < j) quickSort(arr, l, j, partition);
-  if (i < r) quickSort(arr, i, r, partition);   
+  _partitionBookVector(book, l, r, &i, &j);
+  if (l < j) quickSortVectorBook(book, l, j);
+  if (i < r) quickSortVectorBook(book, i, r);
+}
+
+void quickSortVectorText(Text *text, int l, int r) {
+  int i, j;
+  _partitionTextVector(text, l, r, &i, &j);
+  if (l < j) quickSortVectorText(text, l, j);
+  if (i < r) quickSortVectorText(text, i, r);
+}
+
+void quickSortLinkedBook(LinkedBook *lb, int l, int r) {
+  int i, j;
+  _partitionLinkedBook(lb, l, r, &i, &j);
+  if (l < j) quickSortLinkedBook(lb, l, j);
+  if (i < r) quickSortLinkedBook(lb, i, r);
+}
+
+void quickSortLinkedText(LinkedText *lt, int l, int r) {
+  int i, j;
+  _partitionLinkedText(lt, l, r, &i, &j);
+  if (l < j) quickSortLinkedText(lt, l, j);
+  if (i < r) quickSortLinkedText(lt, i, r);
 }
