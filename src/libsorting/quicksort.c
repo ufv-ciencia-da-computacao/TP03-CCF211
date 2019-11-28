@@ -31,7 +31,7 @@ static void _partitionTextVector(Text *arr, int l, int r, int *i, int *j) {
 
   do {
     while (tolower(pivo.character[0]) > tolower(arr->words[*i].character[0])) (*i)++;
-    while (tolower(pivo.character[0]) > tolower(arr->words[*j].character[0])) (*j)--;
+    while (tolower(pivo.character[0]) < tolower(arr->words[*j].character[0])) (*j)--;
     
     if (*i <= *j) {
       Word aux = arr->words[*i];
