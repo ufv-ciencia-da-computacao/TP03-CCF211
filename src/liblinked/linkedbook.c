@@ -61,23 +61,30 @@ int  LinkedBookSize(LinkedBook lb) {
   return size;
 }
 
-void LinkedBookPrint(LinkedBook lb, FILE *stream) {
+void LinkedBookPrint(FILE *stream, LinkedBook lb) {
   LinkedBook iterator = lb;
   while(iterator != NULL) {
-    LinkedTextPrint(iterator->lt, stream);
+    LinkedTextPrint(stream, iterator->lt);
     fprintf(stream, "\n");
     iterator = iterator->next;
   }
 }
 
+void LinkedBookSwap(LinkedBook *lb, int i, int j) {
+  LinkedBook aux1 = LinkedBookGet(*lb, i);
+  LinkedBook aux2 = LinkedBookGet(*lb, j);
+  LinkedText swap = aux1->lt;
+  aux1->lt = aux2->lt;
+  aux2->lt = swap;
+}
 
-LinkedText LinkedBookGetText(LinkedBook lb, int index) {
+LinkedBook LinkedBookGet(LinkedBook lb, int index) {
   LinkedBook iterator = lb;
   int count = 0;
   
   while (iterator != NULL) {
     if (count == index) {
-      return iterator->lt;
+      return iterator;
     }
     count++;
     iterator = iterator->next;

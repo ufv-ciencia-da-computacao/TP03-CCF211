@@ -15,8 +15,9 @@ struct text_t {
 void LinkedTextInit(LinkedText *lt);
 void LinkedTextInsert(LinkedText *lt, LinkedWord lw);
 void LinkedTextRemove(LinkedText *lt, int index);
-LinkedWord LinkedTextGetWord(LinkedText lt, int index);
+LinkedText LinkedTextGet(LinkedText lt, int index);
 int  LinkedTextSize(LinkedText lt);
-void LinkedTextPrint(LinkedText lt, FILE *stream);
+void LinkedTextSwap(LinkedText *lt, int i, int j);
+void LinkedTextPrint(FILE *stream, LinkedText lt);
 
 #endif

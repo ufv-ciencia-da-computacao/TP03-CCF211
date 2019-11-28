@@ -50,19 +50,20 @@ void LinkedTextRemove(LinkedText *lt, int index) {
   }
 }
 
-LinkedWord LinkedTextGetWord(LinkedText lt, int index) {
+LinkedText LinkedTextGet(LinkedText lt, int index) {
   LinkedText iterator = lt;
   int count = 0;
   
   while (iterator != NULL) {
     if (count == index) {
-      return iterator->lw;
+      return iterator;
     }
     count++;
     iterator = iterator->next;
   }
-}
 
+  return NULL;
+}
 
 int  LinkedTextSize(LinkedText lt) {
   if(isEmpty(lt)) return 0;
@@ -75,10 +76,18 @@ int  LinkedTextSize(LinkedText lt) {
   return size;
 }
 
-void LinkedTextPrint(LinkedText lt, FILE *stream) {
+void LinkedTextSwap(LinkedText *lt, int i, int j) {
+  LinkedText aux1 = LinkedTextGet(*lt, i);
+  LinkedText aux2 = LinkedTextGet(*lt, j);
+  LinkedWord swap = aux1->lw;
+  aux1->lw = aux2->lw;
+  aux2->lw = swap;
+}
+
+void LinkedTextPrint(FILE *stream, LinkedText lt) {
   LinkedText iterator = lt;
   while(iterator != NULL) {
-    LinkedWordPrint(iterator->lw, stream);
+    LinkedWordPrint(stream, iterator->lw);
     fprintf(stream, iterator->next != NULL ? " " : "");
     iterator = iterator->next;
   }

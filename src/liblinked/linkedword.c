@@ -30,6 +30,16 @@ void LinkedWordInsert(LinkedWord *lw, char c) {
   }
 }
 
+LinkedWord LinkedWordGet(LinkedWord lw, int index) {
+  LinkedWord iterator = lw;
+  int i;
+  for(i=0; i<index; i++) {
+    if(isEmpty(iterator)) return NULL;
+    iterator = iterator->next;
+  }
+  return iterator;
+}
+
 void LinkedWordRemove(LinkedWord *lw, int index) {
   if(isEmpty(*lw)) return; 
   LinkedWord iterator = *lw, prev = NULL;
@@ -60,7 +70,15 @@ int  LinkedWordSize(LinkedWord lw) {
   return size;
 }
 
-void LinkedWordPrint(LinkedWord lw, FILE *stream) {
+void LinkedWordSwap(LinkedWord *lw, int i, int j) {
+  LinkedWord aux1 = LinkedWordGet(*lw, i);
+  LinkedWord aux2 = LinkedWordGet(*lw, j);
+  char swap = aux1->c;
+  aux1->c = aux2->c;
+  aux2->c = swap;
+}
+
+void LinkedWordPrint(FILE *stream, LinkedWord lw) {
   LinkedWord iterator = lw;
   while (iterator != NULL) {
     fprintf(stream, "%c", iterator->c);
