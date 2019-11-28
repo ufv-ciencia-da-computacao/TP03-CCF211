@@ -49,17 +49,17 @@ void _partitionLinkedBook(LinkedBook *linkedBook, int l, int r, int *i, int *j) 
   *i = l;
   *j = r;
 
-  LinkedText pivo = LinkedBookGetText(linkedBook, ((*i + *j)/2));
+  LinkedText pivo = LinkedBookGetText(*linkedBook, ((*i + *j)/2));
 
   do {
-    while (LinkedTextSize(pivo) > LinkedTextSize(LinkedBookGetText(linkedBook, *i))) (*i)++;
-    while (LinkedTextSize(pivo) < LinkedTextSize(LinkedBookGetText(linkedBook, *j))) (*j)--;
+    while (LinkedTextSize(pivo) > LinkedTextSize(LinkedBookGetText(*linkedBook, *i))) (*i)++;
+    while (LinkedTextSize(pivo) < LinkedTextSize(LinkedBookGetText(*linkedBook, *j))) (*j)--;
     
     if (*i <= *j) {
-      LinkedText aux = LinkedBookGetText(linkedBook, *i);
+      LinkedText aux = LinkedBookGetText(*linkedBook, *i);
 
-      LinkedText textI = LinkedBookGetText(linkedBook, *i);
-      LinkedText textJ = LinkedBookGetText(linkedBook, *j);
+      LinkedText textI = LinkedBookGetText(*linkedBook, *i);
+      LinkedText textJ = LinkedBookGetText(*linkedBook, *j);
 
       textI = textJ;
       textJ = aux;
@@ -75,17 +75,17 @@ void _partitionLinkedText(LinkedText *linkedText, int l, int r, int *i, int *j) 
   *i = l;
   *j = r;
 
-  LinkedWord pivo = LinkedTextGetWord(linkedText, ((*i + *j)/2));
+  LinkedWord pivo = LinkedTextGetWord(*linkedText, ((*i + *j)/2));
 
   do {
-    while (tolower(pivo->c) > tolower(LinkedTextGetWord(linkedText, *i)->c)) (*i)++;
-    while (tolower(pivo->c) < tolower(LinkedTextGetWord(linkedText, *j)->c)) (*j)--;
+    while (tolower(pivo->c) > tolower(LinkedTextGetWord(*linkedText, *i)->c)) (*i)++;
+    while (tolower(pivo->c) < tolower(LinkedTextGetWord(*linkedText, *j)->c)) (*j)--;
     
     if (*i <= *j) {
-      LinkedWord aux = LinkedTextGetWord(linkedText, *i);
+      LinkedWord aux = LinkedTextGetWord(*linkedText, *i);
 
-      LinkedWord wordI = LinkedTextGetWord(linkedText, *i);
-      LinkedWord wordJ = LinkedTextGetWord(linkedText, *j);
+      LinkedWord wordI = LinkedTextGetWord(*linkedText, *i);
+      LinkedWord wordJ = LinkedTextGetWord(*linkedText, *j);
 
       wordI = wordJ;
       wordJ = aux;

@@ -11,21 +11,21 @@ void randomWord(FILE *stream, int length) {
   }
 }
 
-void randomText(FILE *stream, int length, int maxWordLen) {
-  int i, total = 0, wordLen;
-  while(total < length) {
+void randomText(FILE *stream, int minWords, int maxWords, int maxWordLen) {
+  int i, wordLen, 
+      words = minWords + (rand() % (maxWords - minWords + 1));
+  
+  for(i=0; i<words; i++) {
     wordLen = rand() % maxWordLen + 1;
     randomWord(stream, wordLen);
-    total += wordLen;
-    fprintf(stream, i != total < length ? " " : "");
-    total++;
+    fprintf(stream, i != words-1 ? " " : "");
   }
 }
 
-void randomBook(FILE *stream, int texts, int length, int maxWordLen) {
+void randomBook(FILE *stream, int texts, int minWords, int maxWords, int maxWordLen) {
   int i;
   for(i=0; i<texts; i++) {
-    randomText(stream, length, maxWordLen);
+    randomText(stream, minWords, maxWords, maxWordLen);
     fprintf(stream, "\n");
   }
 }

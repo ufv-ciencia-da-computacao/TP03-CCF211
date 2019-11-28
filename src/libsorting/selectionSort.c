@@ -1,8 +1,9 @@
 #include "./includes/selectionSort.h"
 
-void vectorBookSelectionSort(Book *arr, int length) {
+void vectorBookSelectionSort(Book *arr) {
   int min;
   int i, j;
+  int length = bookSize(*arr);
 
   for (i = 0; i < length-1; i++) {
     min = i;
@@ -17,14 +18,14 @@ void vectorBookSelectionSort(Book *arr, int length) {
   } 
 }
 
-void vectorTextSelectionSort(Text *arr, int length) {
+void vectorTextSelectionSort(Text *arr) {
   int min;
   int i, j;
-
+  int length = textSize(*arr);
   for (i = 0; i < length-1; i++) {
     min = i;
     for (j = i+1; j < length; j++) {
-      if (tolower(arr->words[j].character[0]) < arr->words[min].character[0]) {
+      if (tolower(arr->words[j].character[0]) < tolower(arr->words[min].character[0])) {
         min = j;
       }
     }
