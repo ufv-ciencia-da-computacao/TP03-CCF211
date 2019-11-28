@@ -35,42 +35,36 @@ void vectorTextSelectionSort(Text *arr) {
   } 
 }
 
-void linkedTextSelectionSort(LinkedText linkedText, int length) {
+void linkedTextSelectionSort(LinkedText linkedText) {
   int min;
   int i, j;
+  int length = LinkedTextSize(linkedText);
 
   for (i = 0; i < length-1; i++) {
     min = i;
     for (j = i+1; j < length; j++) {
-      if (tolower(LinkedTextGetWord(linkedText, j)->c) < tolower(LinkedTextGetWord(linkedText, min)->c)) {
+      if (tolower(LinkedTextGet(linkedText, j)->lw->c) < tolower(LinkedTextGet(linkedText, min)->lw->c)) {
         min = j;
       }
     }
 
-    LinkedWord wordI = LinkedTextGetWord(linkedText, i);
-    LinkedWord min = LinkedTextGetWord(linkedText, j);
-    LinkedWord aux = min;
-    min = wordI;
-    wordI = aux;
+    LinkedTextSwap(&linkedText, i, min);
   } 
 }
 
-void linkedBookSelectionSort(LinkedBook linkedBook, int length) {
+void linkedBookSelectionSort(LinkedBook linkedBook) {
   int min;
   int i, j;
+  int length = LinkedBookSize(linkedBook);
 
   for (i = 0; i < length-1; i++) {
     min = i;
     for (j = i+1; j < length; j++) {
-      if (LinkedTextSize(LinkedBookGetText(linkedBook, j)) < LinkedTextSize(LinkedBookGetText(linkedBook, min))) {
+      if (LinkedTextSize(LinkedBookGet(linkedBook, j)->lt) < LinkedTextSize(LinkedBookGet(linkedBook, min)->lt)) {
         min = j;
       }
     }
 
-    LinkedText bookI = LinkedBookGetText(linkedBook, i);
-    LinkedText min = LinkedBookGetText(linkedBook, j);
-    LinkedText aux = min;
-    min = bookI;
-    bookI = aux;
+    LinkedBookSwap(&linkedBook, i, min);
   } 
 }

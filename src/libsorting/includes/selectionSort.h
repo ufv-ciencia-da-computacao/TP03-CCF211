@@ -14,7 +14,7 @@
 
 void vectorBookSelectionSort(Book *arr);
 void vectorTextSelectionSort(Text *arr);
-void linkedTextSelectionSort(LinkedText linkedText, int length);
-void linkedBookSelectionSort(LinkedBook linkedBook, int length);
+void linkedTextSelectionSort(LinkedText linkedText);
+void linkedBookSelectionSort(LinkedBook linkedBook);
 
 #endif
