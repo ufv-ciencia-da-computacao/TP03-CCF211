@@ -65,7 +65,7 @@ LinkedText linkedTextGet(LinkedText lt, int index) {
   return NULL;
 }
 
-int  linkedTextSize(LinkedText lt) {
+int linkedTextSize(LinkedText lt) {
   if(isEmpty(lt)) return 0;
   LinkedText iterator = lt;
   int size = 0;
