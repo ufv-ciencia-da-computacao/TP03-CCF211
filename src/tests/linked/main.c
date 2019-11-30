@@ -5,30 +5,30 @@ int main() {
 
   LinkedWord lw;
   LinkedText lt;
-  LinkedTextInit(&lt);
+  linkedTextInit(&lt);
+  
+  linkedWordInit(&lw);
+  linkedWordInsert(&lw, 'a');
+  linkedWordInsert(&lw, 'b');
+  linkedWordInsert(&lw, 'c');
+  linkedTextInsert(&lt, lw);
 
-  LinkedWordInit(&lw);
-  LinkedWordInsert(&lw, 'a');
-  LinkedWordInsert(&lw, 'b');
-  LinkedWordInsert(&lw, 'c');
-  LinkedTextInsert(&lt, lw);
+  linkedWordInit(&lw);
+  linkedWordInsert(&lw, 'c');
+  linkedWordInsert(&lw, 'b');
+  linkedWordInsert(&lw, 'a');
+  linkedTextInsert(&lt, lw);
 
-  LinkedWordInit(&lw);
-  LinkedWordInsert(&lw, 'c');
-  LinkedWordInsert(&lw, 'b');
-  LinkedWordInsert(&lw, 'a');
-  LinkedTextInsert(&lt, lw);
-
-  LinkedWordInit(&lw);
-  LinkedWordInsert(&lw, 'c');
-  LinkedWordInsert(&lw, 'a');
-  LinkedWordInsert(&lw, 'b');
-  LinkedTextInsert(&lt, lw);
-
-  LinkedTextSwap(&lt, 2, 1);
+  linkedWordInit(&lw);
+  linkedWordInsert(&lw, 'c');
+  linkedWordInsert(&lw, 'a');
+  linkedWordInsert(&lw, 'b');
+  linkedTextInsert(&lt, lw);
+  
+  linkedTextSwap(&lt, 2, 1);
 
 
-  LinkedTextPrint(stdout, lt);
+  linkedTextPrint(stdout, lt);
 
   return 0;
 }
