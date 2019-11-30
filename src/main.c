@@ -1,36 +1,18 @@
 #include <stdio.h>
-#include "libvector/includes/vectorbook.h"
+#include "libinterface/includes/file.h"
+#include "libsorting/includes/selectionsort.h"
 
 int main() {
 
-  Word w;
-  wordInit(&w);
+  FILE *ptr = fopen("inputs/test.txt", "r");
 
-  wordInsertChar(&w, 'a');
-  wordInsertChar(&w, 'b');
-  wordInsertChar(&w, 'd');
-  wordInsertChar(&w, 'c');
+  LinkedBook b;
+  linkedBookInit(&b);
+  fileReadLinkedBook(ptr, &b);
+  selectionSortLinkedBook(b);
+  filePrintLinkedBook(stdout, b);
 
-  Text t;
-  textInit(&t);
-
-  textInsertWord(&t, w);
-  textInsertWord(&t, w);
-  textInsertWord(&t, w);
-
-  Book b;
-  bookInit(&b);
-
-  bookInsertWord(&b, t);
-  bookInsertWord(&b, t);
-  bookInsertWord(&b, t);
-  bookInsertWord(&b, t);
-  bookInsertWord(&b, t);
-
-
-
-  bookPrint(stdout, b);
-
+  fclose(ptr);
 
   return 0;
 }

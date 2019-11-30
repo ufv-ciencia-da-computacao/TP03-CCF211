@@ -40,11 +40,3 @@ int bookDeleteText(Book *book, int searched, Text *deleted) {
 int  bookSize(Book book) {
   return book.size;
 }
-
-void bookPrint(FILE *stream, Book book) {
-  int i;
-  for (i = 0; i < book.size; i++) {
-    textPrint(stream, book.texts[i]);
-    fprintf(stream, i != book.size-1 ? "\n" : "");
-  }
-}

@@ -41,11 +41,3 @@ int textDeleteWord(Text *text, int searched, Word *deleted) {
 int textSize(Text text) {
   return text.size;
 }
-
-void textPrint(FILE *stream, Text text) {
-  int i;
-  for (i = 0; i < text.size; i++) {
-    wordPrint(stream, text.words[i]);
-    fprintf(stream, i != text.size-1 ? " " : "");
-  }
-}

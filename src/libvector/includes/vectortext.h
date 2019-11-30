@@ -16,6 +16,5 @@ void textInit(Text *text);
 int textInsertWord(Text *text, Word word);
 int textDeleteWord(Text *text, int searched, Word *deleted);
 int textSize(Text text);
-void textPrint(FILE *stream, Text text);
 
 #endif

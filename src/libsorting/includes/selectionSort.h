@@ -12,9 +12,11 @@
 #include "../../liblinked/includes/linkedtext.h"
 #include "../../liblinked/includes/linkedword.h"
 
-void vectorBookSelectionSort(Book *arr);
-void vectorTextSelectionSort(Text *arr);
-void linkedTextSelectionSort(LinkedText linkedText);
-void linkedBookSelectionSort(LinkedBook linkedBook);
+#include "../../libmetric/includes/metric.h"
+
+void selectionSortVectorBook(Book *arr, Metric *metric);
+void selectionSortVectorText(Text *arr, Metric *metric);
+void selectionSortLinkedText(LinkedText linkedText, Metric *metric);
+void selectionSortLinkedBook(LinkedBook linkedBook, Metric *metric);
 
 #endif
