@@ -76,7 +76,7 @@ static void _partitionLinkedText(LinkedText *linkedText, int l, int r, int *i, i
     while (tolower(pivo->c) < tolower(linkedTextGet(*linkedText, *j)->lw->c)) (*j)--;
     
     if (*i <= *j) {
-      LinkedTextSwap(linkedText, *i, *j);
+      linkedTextSwap(linkedText, *i, *j);
 
       (*i)++;
       (*j)--;

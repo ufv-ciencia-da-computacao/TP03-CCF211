@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "libinterface/includes/file.h"
+#include "libsorting/includes/selectionsort.h"
 
 int main() {
 
@@ -8,9 +9,8 @@ int main() {
   LinkedBook b;
   linkedBookInit(&b);
   fileReadLinkedBook(ptr, &b);
-  linkedBookPrint(stdout, b);
-
-  printf("\n%d\n", linkedBookSize(b));
+  selectionSortLinkedBook(b);
+  filePrintLinkedBook(stdout, b);
 
   fclose(ptr);
 
