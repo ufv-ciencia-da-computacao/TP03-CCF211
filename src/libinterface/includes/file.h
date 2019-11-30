@@ -10,14 +10,15 @@
 #include "../../liblinked/includes/linkedtext.h"
 #include "../../liblinked/includes/linkedbook.h"
 
-#include "./includes/file.h"
+void fileReadVectorBook(FILE *stream, Book *book);
+void fileReadLinkedBook(FILE *stream, LinkedBook *book);
 
-void fileReadVectorWord(char *file, Word *word, int length, int *position);
-void fileReadVectorText(char *file, Text *text, int wordLength, int textLength, int *position);
-void fileReadVectorBook(char *file, Book *book, int wordLength, int textLength, int bookLength, int *position);
+void filePrintVectorWord(FILE *stream, Word word);
+void filePrintVectorText(FILE *stream, Text text);
+void filePrintVectorBook(FILE *stream, Book book);
 
-void fileReadLinkedWord(char *file, LinkedWord *word, int length, int *position);
-void fileReadLinkedText(char *file, LinkedText *text, int wordLength, int textLength, int *position);
-void fileReadLinkedBook(char *file, LinkedBook *book, int wordLength, int textLength, int bookLength, int *position);
+void filePrintLinkedWord(FILE *stream, LinkedWord lw);
+void filePrintLinkedText(FILE *stream, LinkedText lt);
+void filePrintLinkedBook(FILE *stream, LinkedBook lb);
 
 #endif

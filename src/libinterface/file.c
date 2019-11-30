@@ -1,70 +1,100 @@
 #include "./includes/file.h"
 
-void fileReadVectorWord(char *file, Word *word, int length, int *position) {
-  FILE *ptr;
-
-  ptr = fopen(file, "r+");
-
-  int counter = length;
-
-  fseek (ptr, position, SEEK_SET);
-
-  while (!feof(ptr) && --counter) {
-    char c;
-    fread(&c, 1, 1, ptr);
-    wordInsertChar(word, c);
+void fileReadVectorBook(FILE *stream, Book *book) {
+  Word word;
+  wordInit(&word);
+  Text text;
+  textInit(&text);
+  char c;
+  while(1) {
+    c = fgetc(stream);
+    if(feof(stream)) break;
+    if(c == ' ') {
+      textInsertWord(&text, word);
+      wordInit(&word);
+      continue;
+    }
+    if(c == '\n') {
+      textInsertWord(&text, word);
+      bookInsertText(book, text);
+      wordInit(&word);
+      textInit(&text);
+      continue;
+    }
+    wordInsertChar(&word, c);
   }
-
-  position = ftell(ptr);
 }
 
-void fileReadVectorText(char *file, Text *text, int wordLength, int textLength, int *position) {
+void fileReadLinkedBook(FILE *stream, LinkedBook *book) {
+  LinkedWord word;
+  linkedWordInit(&word);
+  LinkedText text;
+  linkedTextInit(&text);
+  char c;
+  while(1) {
+    c = fgetc(stream);
+    if(feof(stream)) break;
+    if(c == ' ') {
+      linkedTextInsert(&text, word);
+      linkedWordInit(&word);
+      continue;
+    }
+    if(c == '\n') {
+      linkedTextInsert(&text, word);
+      linkedBookInsert(book, text);
+      linkedWordInit(&word);
+      linkedTextInit(&text);
+      continue;
+    }
+    linkedWordInsert(&word, c);
+  }
+}
+
+void filePrintVectorWord(FILE *stream, Word word) {
   int i;
-  for (i = 0; i < textLength; i++) {
-    Word word;
-    fileReadVectorWord(file, &word, wordLength, position);
-    textInsertWord(text, word);
+  for(i=0; i<word.size; i++) {
+    fprintf(stream, "%c", word.character[i]);
   }
 }
-void fileReadVectorBook(char *file, Book *book, int wordLength, int textLength, int bookLength, int *position) {
+
+void filePrintVectorText(FILE *stream, Text text) {
   int i;
-  for (i = 0; i < bookLength; i++) {
-    Text text;
-    fileReadVectorText(file, &text, wordLength, textLength, position);
-    bookInsertText(book, text);
+  for (i = 0; i < text.size; i++) {
+    filePrintVectorWord(stream, text.words[i]);
+    fprintf(stream, i != text.size-1 ? " " : "");
   }
 }
 
-void fileReadLinkedWord(char *file, LinkedWord *word, int length, int *position) {
-  FILE *ptr;
-
-  ptr = fopen(file, "r+");
-
-  int counter = length;
-
-  fseek (ptr, position, SEEK_SET);
-
-  while (!feof(ptr) && --counter) {
-    char c;
-    fread(&c, 1, 1, ptr);
-    LinkedWordInsert(word, c);
-  }
-
-  position = ftell(ptr);
-}
-void fileReadLinkedText(char *file, LinkedText *text, int wordLength, int textLength, int *position) {
+void filePrintVectorBook(FILE *stream, Book book) {
   int i;
-  for (i = 0; i < textLength; i++) {
-    LinkedWord word;
-    fileReadLinkedWord(file, &word, wordLength, position);
-    LinkedTextInsert(text, word);
+  for (i = 0; i < book.size; i++) {
+    filePrintVectorText(stream, book.texts[i]);
+    fprintf(stream, i != book.size-1 ? "\n" : "");
   }
 }
-void fileReadLinkedBook(char *file, LinkedBook *book, int wordLength, int textLength, int bookLength, int *position) {
-  int i;
-  for (i = 0; i < bookLength; i++) {
-    LinkedText text;
-    fileReadLinkedText(file, &text, wordLength, textLength, position);
-    LinkedBookInsert(book, text);
+
+void filePrintLinkedWord(FILE *stream, LinkedWord lw) {
+  LinkedWord iterator = lw;
+  while (iterator != NULL) {
+    fprintf(stream, "%c", iterator->c);
+    iterator = iterator->next;
+  }
+}
+
+void filePrintLinkedText(FILE *stream, LinkedText lt) {
+  LinkedText iterator = lt;
+  while(iterator != NULL) {
+    filePrintLinkedWord(stream, iterator->lw);
+    fprintf(stream, iterator->next != NULL ? " " : "");
+    iterator = iterator->next;
+  }
+}
+
+void filePrintLinkedBook(FILE *stream, LinkedBook lb) {
+  LinkedBook iterator = lb;
+  while(iterator != NULL) {
+    filePrintLinkedText(stream, iterator->lt);
+    fprintf(stream, "\n");
+    iterator = iterator->next;
   }
 }
