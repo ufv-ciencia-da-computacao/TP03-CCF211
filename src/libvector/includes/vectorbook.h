@@ -16,6 +16,5 @@ void bookInit(Book *book);
 int  bookInsertText(Book *book, Text text);
 int  bookDeleteText(Book *book, int searched, Text *deleted);
 int  bookSize(Book book);
-void bookPrint(FILE *stream, Book book);
 
 #endif

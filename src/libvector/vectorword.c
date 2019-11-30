@@ -40,10 +40,3 @@ int wordDeleteChar(Word *word, int searched, char *deleted) {
 int wordSize(Word word) {
   return word.size;
 }
-
-void wordPrint(FILE *stream, Word word) {
-  int i;
-  for(i=0; i<word.size; i++) {
-    fprintf(stream, "%c", word.character[i]);
-  }
-}

@@ -18,6 +18,5 @@ void wordInit(Word *word);
 int wordInsertChar(Word *word, char c);
 int wordDeleteChar(Word *word, int searched, char *deleted);
 int wordSize(Word word);
-void wordPrint(FILE *stream, Word word);
 
 #endif
