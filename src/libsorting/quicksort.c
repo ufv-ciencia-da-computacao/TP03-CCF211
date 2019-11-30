@@ -49,14 +49,14 @@ static void _partitionLinkedBook(LinkedBook *linkedBook, int l, int r, int *i, i
   *i = l;
   *j = r;
 
-  LinkedText pivo = LinkedBookGet(*linkedBook, ((*i + *j)/2))->lt;
+  LinkedText pivo = linkedBookGet(*linkedBook, ((*i + *j)/2))->lt;
 
   do {
-    while (LinkedTextSize(pivo) > LinkedTextSize(LinkedBookGet(*linkedBook, *i)->lt)) (*i)++;
-    while (LinkedTextSize(pivo) < LinkedTextSize(LinkedBookGet(*linkedBook, *j)->lt)) (*j)--;
+    while (linkedTextSize(pivo) > linkedTextSize(linkedBookGet(*linkedBook, *i)->lt)) (*i)++;
+    while (linkedTextSize(pivo) < linkedTextSize(linkedBookGet(*linkedBook, *j)->lt)) (*j)--;
     
     if (*i <= *j) {
-      LinkedBookSwap(linkedBook, *i, *j);
+      linkedBookSwap(linkedBook, *i, *j);
 
       (*i)++;
       (*j)--;
@@ -69,11 +69,11 @@ static void _partitionLinkedText(LinkedText *linkedText, int l, int r, int *i, i
   *i = l;
   *j = r;
 
-  LinkedWord pivo = LinkedTextGet(*linkedText, ((*i + *j)/2))->lw;
+  LinkedWord pivo = linkedTextGet(*linkedText, ((*i + *j)/2))->lw;
 
   do {
-    while (tolower(pivo->c) > tolower(LinkedTextGet(*linkedText, *i)->lw->c)) (*i)++;
-    while (tolower(pivo->c) < tolower(LinkedTextGet(*linkedText, *j)->lw->c)) (*j)--;
+    while (tolower(pivo->c) > tolower(linkedTextGet(*linkedText, *i)->lw->c)) (*i)++;
+    while (tolower(pivo->c) < tolower(linkedTextGet(*linkedText, *j)->lw->c)) (*j)--;
     
     if (*i <= *j) {
       LinkedTextSwap(linkedText, *i, *j);

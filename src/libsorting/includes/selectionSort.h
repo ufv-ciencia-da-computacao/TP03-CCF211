@@ -12,9 +12,9 @@
 #include "../../liblinked/includes/linkedtext.h"
 #include "../../liblinked/includes/linkedword.h"
 
-void vectorBookSelectionSort(Book *arr);
-void vectorTextSelectionSort(Text *arr);
-void linkedTextSelectionSort(LinkedText linkedText);
-void linkedBookSelectionSort(LinkedBook linkedBook);
+void selectionSortVectorBook(Book *arr);
+void selectionSortVectorText(Text *arr);
+void selectionSortLinkedText(LinkedText linkedText);
+void selectionSortLinkedBook(LinkedBook linkedBook);
 
 #endif

@@ -1,6 +1,6 @@
-#include "./includes/selectionSort.h"
+#include "./includes/selectionsort.h"
 
-void vectorBookSelectionSort(Book *arr) {
+void selectionSortVectorBook(Book *arr) {
   int min;
   int i, j;
   int length = bookSize(*arr);
@@ -18,7 +18,7 @@ void vectorBookSelectionSort(Book *arr) {
   } 
 }
 
-void vectorTextSelectionSort(Text *arr) {
+void selectionSortVectorText(Text *arr) {
   int min;
   int i, j;
   int length = textSize(*arr);
@@ -35,36 +35,36 @@ void vectorTextSelectionSort(Text *arr) {
   } 
 }
 
-void linkedTextSelectionSort(LinkedText linkedText) {
+void selectionSortLinkedText(LinkedText linkedText) {
   int min;
   int i, j;
-  int length = LinkedTextSize(linkedText);
+  int length = linkedTextSize(linkedText);
 
   for (i = 0; i < length-1; i++) {
     min = i;
     for (j = i+1; j < length; j++) {
-      if (tolower(LinkedTextGet(linkedText, j)->lw->c) < tolower(LinkedTextGet(linkedText, min)->lw->c)) {
+      if (tolower(linkedTextGet(linkedText, j)->lw->c) < tolower(linkedTextGet(linkedText, min)->lw->c)) {
         min = j;
       }
     }
 
-    LinkedTextSwap(&linkedText, i, min);
+    linkedTextSwap(&linkedText, i, min);
   } 
 }
 
-void linkedBookSelectionSort(LinkedBook linkedBook) {
+void selectionSortLinkedBook(LinkedBook linkedBook) {
   int min;
   int i, j;
-  int length = LinkedBookSize(linkedBook);
+  int length = linkedBookSize(linkedBook);
 
   for (i = 0; i < length-1; i++) {
     min = i;
     for (j = i+1; j < length; j++) {
-      if (LinkedTextSize(LinkedBookGet(linkedBook, j)->lt) < LinkedTextSize(LinkedBookGet(linkedBook, min)->lt)) {
+      if (linkedTextSize(linkedBookGet(linkedBook, j)->lt) < linkedTextSize(linkedBookGet(linkedBook, min)->lt)) {
         min = j;
       }
     }
 
-    LinkedBookSwap(&linkedBook, i, min);
+    linkedBookSwap(&linkedBook, i, min);
   } 
 }
