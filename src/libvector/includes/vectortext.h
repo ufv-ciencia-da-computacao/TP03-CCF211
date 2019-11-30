@@ -8,13 +8,13 @@
 #define MAXTAM_TEXT 100
 
 typedef struct vectortext_t {
-  Word words[MAXTAM_TEXT];
+  VectorWord words[MAXTAM_TEXT];
   int size;
-} Text;
+} VectorText;
 
-void textInit(Text *text);
-int textInsertWord(Text *text, Word word);
-int textDeleteWord(Text *text, int searched, Word *deleted);
-int textSize(Text text);
+void textInit(VectorText *text);
+int textInsertWord(VectorText *text, VectorWord word);
+int textDeleteWord(VectorText *text, int searched, VectorWord *deleted);
+int textSize(VectorText text);
 
 #endif

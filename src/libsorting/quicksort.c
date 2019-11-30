@@ -1,10 +1,10 @@
 #include "./includes/quicksort.h"
 
-static void _partitionBookVector(Book *arr, int l, int r, int *i, int *j, Metric *metric) {
+static void _partitionBookVector(VectorBook *arr, int l, int r, int *i, int *j, Metric *metric) {
   *i = l;
   *j = r;
 
-  Text pivo = arr->texts[ (*i + *j)/2 ];
+  VectorText pivo = arr->texts[ (*i + *j)/2 ];
 
   do {
     while (pivo.size > arr->texts[*i].size) {
@@ -18,7 +18,7 @@ static void _partitionBookVector(Book *arr, int l, int r, int *i, int *j, Metric
     }
     
     if (*i <= *j) {
-      Text aux = arr->texts[*i];
+      VectorText aux = arr->texts[*i];
       arr->texts[*i] = arr->texts[*j];
       arr->texts[*j] = aux;
 
@@ -35,11 +35,11 @@ static void _partitionBookVector(Book *arr, int l, int r, int *i, int *j, Metric
 
 }
 
-static void _partitionTextVector(Text *arr, int l, int r, int *i, int *j, Metric *metric) {
+static void _partitionTextVector(VectorText *arr, int l, int r, int *i, int *j, Metric *metric) {
   *i = l;
   *j = r;
 
-  Word pivo = arr->words[ (*i + *j)/2 ];
+  VectorWord pivo = arr->words[ (*i + *j)/2 ];
 
   do {
     while (tolower(pivo.character[0]) > tolower(arr->words[*i].character[0])) { 
@@ -53,7 +53,7 @@ static void _partitionTextVector(Text *arr, int l, int r, int *i, int *j, Metric
     }
     
     if (*i <= *j) {
-      Word aux = arr->words[*i];
+      VectorWord aux = arr->words[*i];
       arr->words[*i] = arr->words[*j];
       arr->words[*j] = aux;
 
@@ -130,14 +130,14 @@ static void _partitionLinkedText(LinkedText *linkedText, int l, int r, int *i, i
   } while (*i <= *j);  
 }
 
-void quickSortVectorBook(Book *book, int l, int r, Metric *metric) {
+void quickSortVectorBook(VectorBook *book, int l, int r, Metric *metric) {
   int i, j;
   _partitionBookVector(book, l, r, &i, &j, metric);
   if (l < j) quickSortVectorBook(book, l, j, metric);
   if (i < r) quickSortVectorBook(book, i, r, metric);
 }
 
-void quickSortVectorText(Text *text, int l, int r, Metric *metric) {
+void quickSortVectorText(VectorText *text, int l, int r, Metric *metric) {
   int i, j;
   _partitionTextVector(text, l, r, &i, &j, metric);
   if (l < j) quickSortVectorText(text, l, j, metric);

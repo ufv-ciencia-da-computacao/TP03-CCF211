@@ -1,6 +1,6 @@
 #include "./includes/selectionSort.h"
 
-void selectionSortVectorBook(Book *arr, Metric *metric) {
+void selectionSortVectorBook(VectorBook *arr, Metric *metric) {
   int min;
   int i, j;
   int length = bookSize(*arr);
@@ -13,7 +13,7 @@ void selectionSortVectorBook(Book *arr, Metric *metric) {
       }
       metricSetComparisons(metric, metricGetComparisons(metric) + 1);
     }
-    Text aux = arr->texts[min];
+    VectorText aux = arr->texts[min];
     arr->texts[min] = arr->texts[i];
     arr->texts[i] = aux;
     
@@ -21,7 +21,7 @@ void selectionSortVectorBook(Book *arr, Metric *metric) {
   } 
 }
 
-void selectionSortVectorText(Text *arr, Metric *metric) {
+void selectionSortVectorText(VectorText *arr, Metric *metric) {
   int min;
   int i, j;
   int length = textSize(*arr);
@@ -33,7 +33,7 @@ void selectionSortVectorText(Text *arr, Metric *metric) {
       }
       metricSetComparisons(metric, metricGetComparisons(metric) + 1);
     }
-    Word aux = arr->words[min];
+    VectorWord aux = arr->words[min];
     arr->words[min] = arr->words[i];
     arr->words[i] = aux;
     metricSetMoves(metric, metricGetMoves(metric) + 1); // swap move

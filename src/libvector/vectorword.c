@@ -1,10 +1,10 @@
 #include "./includes/vectorword.h"
 
-void wordInit(Word *word) {
+void wordInit(VectorWord *word) {
   word->size = 0;
 }
 
-int wordInsertChar(Word *word, char c) {
+int wordInsertChar(VectorWord *word, char c) {
   if (word->size == MAXTAM_WORD) {
     return -1;
   } else {
@@ -14,7 +14,7 @@ int wordInsertChar(Word *word, char c) {
   return 0;
 }
 
-int wordDeleteChar(Word *word, int searched, char *deleted) {
+int wordDeleteChar(VectorWord *word, int searched, char *deleted) {
   int indexSearched = -1;
   int i;
   for (i = 0; i < word->size; i++) {
@@ -37,6 +37,6 @@ int wordDeleteChar(Word *word, int searched, char *deleted) {
   return 1;
 }
 
-int wordSize(Word word) {
+int wordSize(VectorWord word) {
   return word.size;
 }

@@ -1,10 +1,10 @@
 #include "./includes/vectorbook.h"
 
-void bookInit(Book *book) {
+void bookInit(VectorBook *book) {
   book->size = 0;
 }
 
-int bookInsertText(Book *book, Text text) {
+int bookInsertText(VectorBook *book, VectorText text) {
   if (book->size == MAXTAM_BOOK) {
     return -1;
   } else {
@@ -14,7 +14,7 @@ int bookInsertText(Book *book, Text text) {
   return 0;
 }
 
-int bookDeleteText(Book *book, int searched, Text *deleted) {
+int bookDeleteText(VectorBook *book, int searched, VectorText *deleted) {
   int indexSearched = -1;
   int i;
   for (i = 0; i < book->size; i++) {
@@ -37,6 +37,6 @@ int bookDeleteText(Book *book, int searched, Text *deleted) {
   return 1;
 }
 
-int  bookSize(Book book) {
+int  bookSize(VectorBook book) {
   return book.size;
 }

@@ -1,10 +1,10 @@
 #include "./includes/vectortext.h"
 
-void textInit(Text *text) {
+void textInit(VectorText *text) {
   text->size = 0;
 }
 
-int textInsertWord(Text *text, Word word) {
+int textInsertWord(VectorText *text, VectorWord word) {
   if (text->size == MAXTAM_TEXT) {
     return -1;
   } else {
@@ -14,7 +14,7 @@ int textInsertWord(Text *text, Word word) {
   return 0;
 }
 
-int textDeleteWord(Text *text, int searched, Word *deleted) {
+int textDeleteWord(VectorText *text, int searched, VectorWord *deleted) {
   int indexSearched = -1;
   int i;
   for (i = 0; i < text->size; i++) {
@@ -38,6 +38,6 @@ int textDeleteWord(Text *text, int searched, Word *deleted) {
   return 1;
 }
 
-int textSize(Text text) {
+int textSize(VectorText text) {
   return text.size;
 }
