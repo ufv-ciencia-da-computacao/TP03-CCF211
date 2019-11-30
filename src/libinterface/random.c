@@ -4,14 +4,14 @@ void randomInit() {
   srand(time(0));
 }
 
-void randomWord(FILE *stream, int length) {
+void randomWord(int length, FILE *stream) {
   int i;
   for(i=0; i<length; i++) {
     fprintf(stream, "%c", (char) ((rand() % 26) + (rand() % 2 ? 'A' : 'a')));
   }
 }
 
-void randomText(FILE *stream, int minWords, int maxWords, int maxWordLen) {
+void randomText(int minWords, int maxWords, int maxWordLen, FILE *stream) {
   int i, wordLen, 
       words = minWords + (rand() % (maxWords - minWords + 1));
   
@@ -22,7 +22,7 @@ void randomText(FILE *stream, int minWords, int maxWords, int maxWordLen) {
   }
 }
 
-void randomBook(FILE *stream, int texts, int minWords, int maxWords, int maxWordLen) {
+void randomBook(int texts, int minWords, int maxWords, int maxWordLen, FILE *stream) {
   int i;
   for(i=0; i<texts; i++) {
     randomText(stream, minWords, maxWords, maxWordLen);

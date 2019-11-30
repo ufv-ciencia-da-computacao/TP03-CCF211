@@ -7,8 +7,8 @@
 #include <stdio.h>
 
 void randomInit();
-void randomWord(FILE *stream, int length);
-void randomText(FILE *stream, int minWords, int maxWords, int maxWordLen);
-void randomBook(FILE *stream, int texts, int minWords, int maxWords, int maxWordLen);
+void randomWord(int length, FILE *stream);
+void randomText(int minWords, int maxWords, int maxWordLen, FILE *stream);
+void randomBook(int texts, int minWords, int maxWords, int maxWordLen, FILE *stream);
 
 #endif
