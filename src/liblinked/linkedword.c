@@ -14,11 +14,11 @@ static void nodeFree(LinkedWord lw) {
   free(lw);
 }
 
-void LinkedWordInit(LinkedWord *lw) {
+void linkedWordInit(LinkedWord *lw) {
   *lw = NULL;
 }
 
-void LinkedWordInsert(LinkedWord *lw, char c) {
+void linkedWordInsert(LinkedWord *lw, char c) {
   LinkedWord iterator = *lw;
   if(isEmpty(*lw)) {
     *lw = create(c);
@@ -30,7 +30,7 @@ void LinkedWordInsert(LinkedWord *lw, char c) {
   }
 }
 
-LinkedWord LinkedWordGet(LinkedWord lw, int index) {
+LinkedWord linkedWordGet(LinkedWord lw, int index) {
   LinkedWord iterator = lw;
   int i;
   for(i=0; i<index; i++) {
@@ -40,7 +40,7 @@ LinkedWord LinkedWordGet(LinkedWord lw, int index) {
   return iterator;
 }
 
-void LinkedWordRemove(LinkedWord *lw, int index) {
+void linkedWordRemove(LinkedWord *lw, int index) {
   if(isEmpty(*lw)) return; 
   LinkedWord iterator = *lw, prev = NULL;
   int i;
@@ -59,7 +59,7 @@ void LinkedWordRemove(LinkedWord *lw, int index) {
   }
 }
 
-int  LinkedWordSize(LinkedWord lw) {
+int  linkedWordSize(LinkedWord lw) {
   if(isEmpty(lw)) return 0;
   LinkedWord iterator = lw;
   int size = 0;
@@ -70,18 +70,10 @@ int  LinkedWordSize(LinkedWord lw) {
   return size;
 }
 
-void LinkedWordSwap(LinkedWord *lw, int i, int j) {
-  LinkedWord aux1 = LinkedWordGet(*lw, i);
-  LinkedWord aux2 = LinkedWordGet(*lw, j);
+void linkedWordSwap(LinkedWord *lw, int i, int j) {
+  LinkedWord aux1 = linkedWordGet(*lw, i);
+  LinkedWord aux2 = linkedWordGet(*lw, j);
   char swap = aux1->c;
   aux1->c = aux2->c;
   aux2->c = swap;
-}
-
-void LinkedWordPrint(FILE *stream, LinkedWord lw) {
-  LinkedWord iterator = lw;
-  while (iterator != NULL) {
-    fprintf(stream, "%c", iterator->c);
-    iterator = iterator->next;
-  }
 }

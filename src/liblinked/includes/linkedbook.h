@@ -12,12 +12,11 @@ struct book_t {
   LinkedBook next;
 };
 
-void LinkedBookInit(LinkedBook *lb);
-void LinkedBookInsert(LinkedBook *lb, LinkedText lt);
-void LinkedBookRemove(LinkedBook *lb, int index);
-LinkedBook LinkedBookGet(LinkedBook lb, int index);
-int  LinkedBookSize(LinkedBook lb);
-void LinkedBookSwap(LinkedBook *lb, int i, int j);
-void LinkedBookPrint(FILE *stream, LinkedBook lb);
+void linkedBookInit(LinkedBook *lb);
+void linkedBookInsert(LinkedBook *lb, LinkedText lt);
+void linkedBookRemove(LinkedBook *lb, int index);
+LinkedBook linkedBookGet(LinkedBook lb, int index);
+int  linkedBookSize(LinkedBook lb);
+void linkedBookSwap(LinkedBook *lb, int i, int j);
 
 #endif

@@ -15,11 +15,11 @@ static void nodeFree(LinkedText lt) {
   free(lt);
 }
 
-void LinkedTextInit(LinkedText *lt) {
+void linkedTextInit(LinkedText *lt) {
   *lt = NULL;
 }
 
-void LinkedTextInsert(LinkedText *lt, LinkedWord lw) {
+void linkedTextInsert(LinkedText *lt, LinkedWord lw) {
   LinkedText iterator = *lt;
   if(isEmpty(*lt)) {
     *lt = create(lw);
@@ -31,7 +31,7 @@ void LinkedTextInsert(LinkedText *lt, LinkedWord lw) {
   }
 }
 
-void LinkedTextRemove(LinkedText *lt, int index) {
+void linkedTextRemove(LinkedText *lt, int index) {
   if(isEmpty(*lt)) return; 
   LinkedText iterator = *lt, prev = NULL;
   int i;
@@ -50,7 +50,7 @@ void LinkedTextRemove(LinkedText *lt, int index) {
   }
 }
 
-LinkedText LinkedTextGet(LinkedText lt, int index) {
+LinkedText linkedTextGet(LinkedText lt, int index) {
   LinkedText iterator = lt;
   int count = 0;
   
@@ -65,7 +65,7 @@ LinkedText LinkedTextGet(LinkedText lt, int index) {
   return NULL;
 }
 
-int  LinkedTextSize(LinkedText lt) {
+int  linkedTextSize(LinkedText lt) {
   if(isEmpty(lt)) return 0;
   LinkedText iterator = lt;
   int size = 0;
@@ -76,20 +76,11 @@ int  LinkedTextSize(LinkedText lt) {
   return size;
 }
 
-void LinkedTextSwap(LinkedText *lt, int i, int j) {
-  LinkedText aux1 = LinkedTextGet(*lt, i);
-  LinkedText aux2 = LinkedTextGet(*lt, j);
+void linkedTextSwap(LinkedText *lt, int i, int j) {
+  LinkedText aux1 = linkedTextGet(*lt, i);
+  LinkedText aux2 = linkedTextGet(*lt, j);
   LinkedWord swap = aux1->lw;
   aux1->lw = aux2->lw;
   aux2->lw = swap;
-}
-
-void LinkedTextPrint(FILE *stream, LinkedText lt) {
-  LinkedText iterator = lt;
-  while(iterator != NULL) {
-    LinkedWordPrint(stream, iterator->lw);
-    fprintf(stream, iterator->next != NULL ? " " : "");
-    iterator = iterator->next;
-  }
 }
 

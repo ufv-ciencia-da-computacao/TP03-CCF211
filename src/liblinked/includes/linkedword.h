@@ -10,12 +10,11 @@ struct word_t {
   LinkedWord next;
 };
 
-void LinkedWordInit(LinkedWord *lw);
-void LinkedWordInsert(LinkedWord *lw, char c);
-LinkedWord LinkedWordGet(LinkedWord lw, int index);
-void LinkedWordRemove(LinkedWord *lw, int index);
-int  LinkedWordSize(LinkedWord lw);
-void LinkedWordSwap(LinkedWord *lw, int i, int j);
-void LinkedWordPrint(FILE *stream, LinkedWord lw);
+void linkedWordInit(LinkedWord *lw);
+void linkedWordInsert(LinkedWord *lw, char c);
+LinkedWord linkedWordGet(LinkedWord lw, int index);
+void linkedWordRemove(LinkedWord *lw, int index);
+int  linkedWordSize(LinkedWord lw);
+void linkedWordSwap(LinkedWord *lw, int i, int j);
 
 #endif

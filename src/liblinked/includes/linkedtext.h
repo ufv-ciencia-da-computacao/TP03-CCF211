@@ -12,12 +12,11 @@ struct text_t {
   LinkedText next;
 };
 
-void LinkedTextInit(LinkedText *lt);
-void LinkedTextInsert(LinkedText *lt, LinkedWord lw);
-void LinkedTextRemove(LinkedText *lt, int index);
-LinkedText LinkedTextGet(LinkedText lt, int index);
-int  LinkedTextSize(LinkedText lt);
-void LinkedTextSwap(LinkedText *lt, int i, int j);
-void LinkedTextPrint(FILE *stream, LinkedText lt);
+void linkedTextInit(LinkedText *lt);
+void linkedTextInsert(LinkedText *lt, LinkedWord lw);
+void linkedTextRemove(LinkedText *lt, int index);
+LinkedText linkedTextGet(LinkedText lt, int index);
+int  linkedTextSize(LinkedText lt);
+void linkedTextSwap(LinkedText *lt, int i, int j);
 
 #endif

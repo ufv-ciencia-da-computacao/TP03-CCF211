@@ -15,11 +15,11 @@ static void nodeFree(LinkedBook lb) {
   free(lb);
 }
 
-void LinkedBookInit(LinkedBook *lb) {
+void linkedBookInit(LinkedBook *lb) {
   *lb = NULL;
 }
 
-void LinkedBookInsert(LinkedBook *lb, LinkedText lt) {
+void linkedBookInsert(LinkedBook *lb, LinkedText lt) {
   LinkedBook iterator = *lb;
   if(isEmpty(*lb)) {
     *lb = create(lt);
@@ -31,7 +31,7 @@ void LinkedBookInsert(LinkedBook *lb, LinkedText lt) {
   }
 }
 
-void LinkedBookRemove(LinkedBook *lb, int index) {
+void linkedBookRemove(LinkedBook *lb, int index) {
   if(isEmpty(*lb)) return; 
   LinkedBook iterator = *lb, prev = NULL;
   int i;
@@ -50,7 +50,7 @@ void LinkedBookRemove(LinkedBook *lb, int index) {
   }
 }
 
-int  LinkedBookSize(LinkedBook lb) {
+int  linkedBookSize(LinkedBook lb) {
   if(isEmpty(lb)) return 0;
   LinkedBook iterator = lb;
   int size = 0;
@@ -61,24 +61,15 @@ int  LinkedBookSize(LinkedBook lb) {
   return size;
 }
 
-void LinkedBookPrint(FILE *stream, LinkedBook lb) {
-  LinkedBook iterator = lb;
-  while(iterator != NULL) {
-    LinkedTextPrint(stream, iterator->lt);
-    fprintf(stream, "\n");
-    iterator = iterator->next;
-  }
-}
-
-void LinkedBookSwap(LinkedBook *lb, int i, int j) {
-  LinkedBook aux1 = LinkedBookGet(*lb, i);
-  LinkedBook aux2 = LinkedBookGet(*lb, j);
+void linkedBookSwap(LinkedBook *lb, int i, int j) {
+  LinkedBook aux1 = linkedBookGet(*lb, i);
+  LinkedBook aux2 = linkedBookGet(*lb, j);
   LinkedText swap = aux1->lt;
   aux1->lt = aux2->lt;
   aux2->lt = swap;
 }
 
-LinkedBook LinkedBookGet(LinkedBook lb, int index) {
+LinkedBook linkedBookGet(LinkedBook lb, int index) {
   LinkedBook iterator = lb;
   int count = 0;
   
