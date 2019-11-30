@@ -8,13 +8,13 @@
 #define MAXTAM_BOOK 100
 
 typedef struct vectorbook_t {
-  Text texts[MAXTAM_BOOK];
+  VectorText texts[MAXTAM_BOOK];
   int size;
-} Book;
+} VectorBook;
 
-void bookInit(Book *book);
-int  bookInsertText(Book *book, Text text);
-int  bookDeleteText(Book *book, int searched, Text *deleted);
-int  bookSize(Book book);
+void bookInit(VectorBook *book);
+int  bookInsertText(VectorBook *book, VectorText text);
+int  bookDeleteText(VectorBook *book, int searched, VectorText *deleted);
+int  bookSize(VectorBook book);
 
 #endif

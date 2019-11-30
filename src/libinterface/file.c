@@ -1,9 +1,9 @@
 #include "./includes/file.h"
 
-void fileReadVectorBook(FILE *stream, Book *book) {
-  Word word;
+void fileReadVectorBook(FILE *stream, VectorBook *book) {
+  VectorWord word;
   wordInit(&word);
-  Text text;
+  VectorText text;
   textInit(&text);
   char c;
   while(1) {
@@ -50,14 +50,14 @@ void fileReadLinkedBook(FILE *stream, LinkedBook *book) {
   }
 }
 
-void filePrintVectorWord(FILE *stream, Word word) {
+void filePrintVectorWord(FILE *stream, VectorWord word) {
   int i;
   for(i=0; i<word.size; i++) {
     fprintf(stream, "%c", word.character[i]);
   }
 }
 
-void filePrintVectorText(FILE *stream, Text text) {
+void filePrintVectorText(FILE *stream, VectorText text) {
   int i;
   for (i = 0; i < text.size; i++) {
     filePrintVectorWord(stream, text.words[i]);
@@ -65,7 +65,7 @@ void filePrintVectorText(FILE *stream, Text text) {
   }
 }
 
-void filePrintVectorBook(FILE *stream, Book book) {
+void filePrintVectorBook(FILE *stream, VectorBook book) {
   int i;
   for (i = 0; i < book.size; i++) {
     filePrintVectorText(stream, book.texts[i]);

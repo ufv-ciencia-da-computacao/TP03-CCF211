@@ -12,11 +12,11 @@
 typedef struct vectorword_t {
   char character[MAXTAM_WORD];
   int size;
-} Word;
+} VectorWord;
 
-void wordInit(Word *word);
-int wordInsertChar(Word *word, char c);
-int wordDeleteChar(Word *word, int searched, char *deleted);
-int wordSize(Word word);
+void wordInit(VectorWord *word);
+int wordInsertChar(VectorWord *word, char c);
+int wordDeleteChar(VectorWord *word, int searched, char *deleted);
+int wordSize(VectorWord word);
 
 #endif

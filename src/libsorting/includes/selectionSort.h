@@ -14,8 +14,8 @@
 
 #include "../../libmetric/includes/metric.h"
 
-void selectionSortVectorBook(Book *arr, Metric *metric);
-void selectionSortVectorText(Text *arr, Metric *metric);
+void selectionSortVectorBook(VectorBook *arr, Metric *metric);
+void selectionSortVectorText(VectorText *arr, Metric *metric);
 void selectionSortLinkedText(LinkedText linkedText, Metric *metric);
 void selectionSortLinkedBook(LinkedBook linkedBook, Metric *metric);
 
