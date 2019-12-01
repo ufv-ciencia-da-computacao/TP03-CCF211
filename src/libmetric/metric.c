@@ -3,6 +3,7 @@
 void metricInit(Metric *metric) {
   metric->comparisons = 0;
   metric->moves = 0;
+  metric->time = clock();
 }
 
 int metricGetMoves(Metric *metric) {
@@ -11,6 +12,10 @@ int metricGetMoves(Metric *metric) {
 
 int metricGetComparisons(Metric *metric) {
   return metric->comparisons;
+}
+
+double metricGetSeconds(Metric metric) {
+  return (double) metric.time / (double) CLOCKS_PER_SEC;
 }
 
 void metricAddOneMove(Metric *metric) {
@@ -27,4 +32,8 @@ void metricSetMoves(Metric *metric, int moves) {
 
 void metricSetComparisons(Metric *metric, int comparisons) {
   metric->comparisons = comparisons;
+}
+
+void metricFinish(Metric *metric) {
+  metric->time = clock() - metric->time;
 }
