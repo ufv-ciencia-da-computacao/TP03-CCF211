@@ -57,8 +57,8 @@ int main() {
       break;
     
     case 4:
+      metricInit(&metric);
       if(menu.vector_linked) {
-        length = linkedBookSize(lb);
         if(menu.quick_selection) {
           selectionSortLinkedBook(lb, &metric);
         } else {
@@ -71,9 +71,14 @@ int main() {
           quickSortVectorBook(&vb, 0, bookSize(vb)-1, &metric);
         }
       }
+      metricFinish(&metric);
+      printf("\n");
+      filePrintMetric(metric);
+      menuContinue();
       break;
 
     case 5:
+      metricInit(&metric);
       if(menu.vector_linked) {
         length = linkedBookSize(lb);
         if(menu.quick_selection) {
@@ -97,6 +102,10 @@ int main() {
           }
         }
       }
+      metricFinish(&metric);
+      printf("\n");
+      filePrintMetric(metric);
+      menuContinue();
       break; 
     
     case 6: 

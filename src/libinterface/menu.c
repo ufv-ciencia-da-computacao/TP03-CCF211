@@ -18,7 +18,7 @@ int menuShow(Menu menu) {
   printf("4- Ordenar Biblioteca\n");
   printf("5- Ordenar Textos\n");
   printf("6- Trocar Odenacao (%s sort ativo)\n", menu.quick_selection ? "selection" : "quick");
-  printf("7- Trocar Estrutura (%s list ativa)\n", menu.vector_linked ? "linked" : "vector");
+  printf("7- Trocar Estrutura (lista %s ativa)\n", menu.vector_linked ? "encadeada" : "vetor");
   printf("0- Sair\n");
   printf(": ");
   int opt;
