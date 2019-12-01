@@ -33,7 +33,7 @@ int main() {
     switch (opt) {
     case 1: 
       if(menu.vector_linked) {
-        /* free previous alocated */
+        linkedBookFree(&lb);
         linkedBookInit(&lb);
         randomReadLinkedBook(menu.texts, menu.minWords, menu.maxWords, menu.maxWordLen, &lb);
       } else {

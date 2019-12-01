@@ -8,11 +8,7 @@ static LinkedBook create(LinkedText lt) {
   LinkedBook new = (LinkedBook) malloc(sizeof(struct book_t));
   new->next = NULL;
   new->lt = lt;
-}
-
-static void nodeFree(LinkedBook lb) {
-  /* free text */
-  free(lb);
+  return new;
 }
 
 void linkedBookInit(LinkedBook *lb) {
@@ -46,7 +42,8 @@ void linkedBookRemove(LinkedBook *lb, int index) {
     } else {
       prev->next = iterator->next;
     }
-    nodeFree(iterator);
+    linkedTextFree(&(iterator->lt));
+    free(iterator);
   }
 }
 
@@ -84,3 +81,9 @@ LinkedBook linkedBookGet(LinkedBook lb, int index) {
   return NULL;
 }
 
+
+void linkedBookFree(LinkedBook *lb) {
+  while(!isEmpty(*lb)) {
+    linkedBookRemove(lb, 0);
+  }
+}

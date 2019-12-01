@@ -8,10 +8,7 @@ static LinkedWord create(char c) {
   LinkedWord new = (LinkedWord) malloc(sizeof(struct word_t));
   new->next = NULL;
   new->c = c;
-}
-
-static void nodeFree(LinkedWord lw) {
-  free(lw);
+  return new;
 }
 
 void linkedWordInit(LinkedWord *lw) {
@@ -55,7 +52,7 @@ void linkedWordRemove(LinkedWord *lw, int index) {
     } else {
       prev->next = iterator->next;
     }
-    nodeFree(iterator);
+    free(iterator);
   }
 }
 
@@ -76,4 +73,10 @@ void linkedWordSwap(LinkedWord *lw, int i, int j) {
   char swap = aux1->c;
   aux1->c = aux2->c;
   aux2->c = swap;
+}
+
+void linkedWordFree(LinkedWord *lw) {
+  while(!isEmpty(*lw)) {
+    linkedWordRemove(lw, 0);
+  }
 }

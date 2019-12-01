@@ -8,11 +8,7 @@ static LinkedText create(LinkedWord lw) {
   LinkedText new = (LinkedText) malloc(sizeof(struct text_t));
   new->next = NULL;
   new->lw = lw;
-}
-
-static void nodeFree(LinkedText lt) {
-  /* free word */
-  free(lt);
+  return new;
 }
 
 void linkedTextInit(LinkedText *lt) {
@@ -46,7 +42,8 @@ void linkedTextRemove(LinkedText *lt, int index) {
     } else {
       prev->next = iterator->next;
     }
-    nodeFree(iterator);
+    linkedWordFree(&(iterator->lw));
+    free(iterator);
   }
 }
 
@@ -82,5 +79,11 @@ void linkedTextSwap(LinkedText *lt, int i, int j) {
   LinkedWord swap = aux1->lw;
   aux1->lw = aux2->lw;
   aux2->lw = swap;
+}
+
+void linkedTextFree(LinkedText *lt) {
+  while(!isEmpty(*lt)) {
+    linkedTextRemove(lt, 0);
+  }
 }
 

@@ -16,5 +16,6 @@ LinkedWord linkedWordGet(LinkedWord lw, int index);
 void linkedWordRemove(LinkedWord *lw, int index);
 int  linkedWordSize(LinkedWord lw);
 void linkedWordSwap(LinkedWord *lw, int i, int j);
+void linkedWordFree(LinkedWord *lw);
 
 #endif

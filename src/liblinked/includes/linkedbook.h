@@ -18,5 +18,6 @@ void linkedBookRemove(LinkedBook *lb, int index);
 LinkedBook linkedBookGet(LinkedBook lb, int index);
 int  linkedBookSize(LinkedBook lb);
 void linkedBookSwap(LinkedBook *lb, int i, int j);
+void linkedBookFree(LinkedBook *lb);
 
 #endif

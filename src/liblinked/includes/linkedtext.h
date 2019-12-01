@@ -18,5 +18,6 @@ void linkedTextRemove(LinkedText *lt, int index);
 LinkedText linkedTextGet(LinkedText lt, int index);
 int  linkedTextSize(LinkedText lt);
 void linkedTextSwap(LinkedText *lt, int i, int j);
+void linkedTextFree(LinkedText *lt);
 
 #endif
