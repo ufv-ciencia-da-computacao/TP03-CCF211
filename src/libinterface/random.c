@@ -17,7 +17,7 @@ void randomPrintText(int minWords, int maxWords, int maxWordLen, FILE *stream) {
   
   for(i=0; i<words; i++) {
     wordLen = rand() % maxWordLen + 1;
-    randomWord(stream, wordLen);
+    randomPrintWord(wordLen, stream);
     fprintf(stream, i != words-1 ? " " : "");
   }
 }
@@ -25,7 +25,7 @@ void randomPrintText(int minWords, int maxWords, int maxWordLen, FILE *stream) {
 void randomPrintBook(int texts, int minWords, int maxWords, int maxWordLen, FILE *stream) {
   int i;
   for(i=0; i<texts; i++) {
-    randomText(stream, minWords, maxWords, maxWordLen);
+    randomPrintText(minWords, maxWords, maxWordLen, stream);
     fprintf(stream, "\n");
   }
 }
@@ -40,17 +40,22 @@ void randomReadVectorWord(int length, VectorWord *word) {
 void randomReadVectorText(int minWords, int maxWords, int maxWordLen, VectorText *text) {
   int i, wordLen, 
       words = minWords + (rand() % (maxWords - minWords + 1));
-  
+  VectorWord vw;
   for(i=0; i<words; i++) {
+    wordInit(&vw);
     wordLen = rand() % maxWordLen + 1;
-    randomReadVectorWord(wordLen, &(text->words[i]));
+    randomReadVectorWord(wordLen, &vw);
+    textInsertWord(text, vw);
   }
 }
 
 void randomReadVectorBook(int texts, int minWords, int maxWords, int maxWordLen, VectorBook *book) {
   int i;
+  VectorText vt;
   for(i=0; i<texts; i++) {
-    randomReadVectorText(minWords, maxWords, maxWordLen, &(book->texts[i]));
+    textInit(&vt);
+    randomReadVectorText(minWords, maxWords, maxWordLen, &vt);
+    bookInsertText(book, vt);
   }
 }
 
@@ -64,17 +69,22 @@ void randomReadLinkedWord(int length, LinkedWord *word) {
 void randomReadLinkedText(int minWords, int maxWords, int maxWordLen, LinkedText *text) {
   int i, wordLen, 
       words = minWords + (rand() % (maxWords - minWords + 1));
-  
+  LinkedWord lw;
   for(i=0; i<words; i++) {
+    linkedWordInit(&lw);
     wordLen = rand() % maxWordLen + 1;
-    randomReadLinkedWord(wordLen, &(linkedTextGet(text, i)->lw));
+    randomReadLinkedWord(wordLen, &lw);
+    linkedTextInsert(text, lw);
   }
 }
 
-void randomPrintLinkedBook(int texts, int minWords, int maxWords, int maxWordLen, LinkedBook *book) {
+void randomReadLinkedBook(int texts, int minWords, int maxWords, int maxWordLen, LinkedBook *book) {
   int i;
+  LinkedText lt;
   for(i=0; i<texts; i++) {
-    randomReadLinkedText(minWords, maxWords, maxWordLen, &(linkedBookGet(book, i)->lt));
+    linkedTextInit(&lt);
+    randomReadLinkedText(minWords, maxWords, maxWordLen, &lt);
+    linkedBookInsert(book, lt);
   }
 }
 

@@ -15,22 +15,16 @@
 #include "../../liblinked/includes/linkedword.h"
 
 void randomInit();
-void randomWord(int length, FILE *stream);
-void randomText(int minWords, int maxWords, int maxWordLen, FILE *stream);
-void randomBook(int texts, int minWords, int maxWords, int maxWordLen, FILE *stream);
-
-#include "./includes/random.h"
-
-void randomInit();
 
 void randomPrintWord(int length, FILE *stream);
 void randomPrintText(int minWords, int maxWords, int maxWordLen, FILE *stream);
 void randomPrintBook(int texts, int minWords, int maxWords, int maxWordLen, FILE *stream);
+
 void randomReadVectorWord(int length, VectorWord *word);
 void randomReadVectorText(int minWords, int maxWords, int maxWordLen, VectorText *text);
 void randomReadVectorBook(int texts, int minWords, int maxWords, int maxWordLen, VectorBook *book);
 void randomReadLinkedWord(int length, LinkedWord *word);
-void randomPrintLinkedText(int minWords, int maxWords, int maxWordLen, LinkedText *text)
-void randomPrintLinkedBook(int texts, int minWords, int maxWords, int maxWordLen, LinkedBook *book);
+void randomReadLinkedText(int minWords, int maxWords, int maxWordLen, LinkedText *text);
+void randomReadLinkedBook(int texts, int minWords, int maxWords, int maxWordLen, LinkedBook *book);
 
 #endif
