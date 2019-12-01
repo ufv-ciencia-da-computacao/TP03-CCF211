@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MAXTAM_WORD 15
+#define MAXTAM_WORD 20
 #include <stdbool.h>
 #include <string.h>
 #include <stdio.h>
