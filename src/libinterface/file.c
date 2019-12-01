@@ -69,7 +69,7 @@ void filePrintVectorBook(FILE *stream, VectorBook book) {
   int i;
   for (i = 0; i < book.size; i++) {
     filePrintVectorText(stream, book.texts[i]);
-    fprintf(stream, i != book.size-1 ? "\n" : "");
+    fprintf(stream, "\n");
   }
 }
 

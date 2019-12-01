@@ -1,13 +1,22 @@
 all: main clear
 
-main: main.o file.o quicksort.o selectionsort.o vectorbook.o vectortext.o vectorword.o linkedbook.o linkedtext.o linkedword.o
-	gcc main.o file.o quicksort.o selectionsort.o vectorbook.o vectortext.o vectorword.o linkedbook.o linkedtext.o linkedword.o -o main
+main: main.o menu.o random.o metric.o file.o quicksort.o selectionsort.o vectorbook.o vectortext.o vectorword.o linkedbook.o linkedtext.o linkedword.o
+	gcc main.o menu.o random.o metric.o file.o quicksort.o selectionsort.o vectorbook.o vectortext.o vectorword.o linkedbook.o linkedtext.o linkedword.o -o main
 
 main.o: main.c
 	gcc -c main.c -o main.o
 
 file.o: libinterface/file.c
 	gcc -c libinterface/file.c -o file.o
+
+menu.o: libinterface/menu.c
+	gcc -c libinterface/menu.c -o menu.o
+
+random.o: libinterface/random.c
+	gcc -c libinterface/random.c -o random.o
+
+metric.o: libmetric/metric.c
+	gcc -c libmetric/metric.c -o metric.o
 
 quicksort.o: libsorting/quicksort.c
 	gcc -c libsorting/quicksort.c -o quicksort.o
