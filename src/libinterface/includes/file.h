@@ -10,6 +10,8 @@
 #include "../../liblinked/includes/linkedtext.h"
 #include "../../liblinked/includes/linkedbook.h"
 
+#include "../../libmetric/includes/metric.h"
+
 void fileReadVectorBook(FILE *stream, VectorBook *book);
 void fileReadLinkedBook(FILE *stream, LinkedBook *book);
 
@@ -20,5 +22,7 @@ void filePrintVectorBook(FILE *stream, VectorBook book);
 void filePrintLinkedWord(FILE *stream, LinkedWord lw);
 void filePrintLinkedText(FILE *stream, LinkedText lt);
 void filePrintLinkedBook(FILE *stream, LinkedBook lb);
+
+void filePrintMetric(Metric metric);
 
 #endif
