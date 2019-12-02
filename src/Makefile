@@ -43,4 +43,4 @@ linkedword.o: liblinked/linkedword.c
 	gcc -c liblinked/linkedword.c -o linkedword.o
 
 clear:
-	del *.o
+	rm *.o

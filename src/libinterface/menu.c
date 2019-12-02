@@ -7,12 +7,17 @@ void menuInit(Menu *menu) {
   menu->maxWordLen = 5;
   menu->vector_linked = 0;
   menu->quick_selection = 0;
+  strcpy(menu->filename, "test.txt");
 }
 
 int menuShow(Menu menu) {
-  system("cls");
+   #ifdef _WIN32
+      system("cls");
+    #else
+      system("clear");
+    #endif
   printf("-------------- MENU --------------\n");
-  printf("1- Criar Biblioteca (%d textos, %d a %d palavras, ate %d letras)\n", menu.texts, menu.minWords, menu.maxWords, menu.maxWordLen);
+  printf("1- Criar Biblioteca (%d textos, %d a %d palavras, ate %d letras, arquivo de leitura - \"%s\")\n", menu.texts, menu.minWords, menu.maxWords, menu.maxWordLen, menu.filename);
   printf("2- Alterar Padrao de Criacao\n");
   printf("3- Mostrar Biblioteca\n");
   printf("4- Ordenar Biblioteca\n");
@@ -43,10 +48,38 @@ void menuSetParameters(Menu *menu) {
   scanf("%d", &menu->maxWords);
   printf("Tamanho maximo de palavra (max 20): ");
   scanf("%d", &menu->maxWordLen);
+  #ifdef _WIN32
+    fflush(stdin);
+  #else
+    __fpurge(stdin);
+  #endif
+  printf("Nome do arquivo: ");
+  scanf("%s", menu->filename);
+}
+
+void menuSetFile(char *filename, int texts, int minWords, int maxWords, int maxWordLen) {
+  FILE *file = NULL;
+  char fileDir[FILENAME_MAX] = "./inputs/";
+  char aux[FILENAME_MAX];
+
+  strcpy(aux, filename);
+  strcpy(filename, "");
+  strcat(filename, fileDir);
+  strcat(filename, aux);
+  
+  file = fopen(filename, "w+");
+  
+  randomPrintBook(texts, minWords, maxWords, maxWords, file);
+  
+  fclose(file);
 }
 
 void menuContinue() {
   printf("\npressione ENTER para continuar...\n");
-  fflush(stdin);
+  #ifdef _WIN32
+    fflush(stdin);
+  #else
+    __fpurge(stdin);
+  #endif
   getchar();
 }

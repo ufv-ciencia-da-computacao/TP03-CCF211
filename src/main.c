@@ -9,6 +9,8 @@
 
 int main() {
 
+  FILE *file;
+
   Menu menu;
   menuInit(&menu);
 
@@ -32,14 +34,19 @@ int main() {
     opt = menuShow(menu);
     switch (opt) {
     case 1: 
+      menuSetFile(menu.filename, menu.texts, menu.minWords, menu.maxWords, menu.maxWordLen);
+      file = fopen(menu.filename, "r+");
+
       if(menu.vector_linked) {
         linkedBookFree(&lb);
         linkedBookInit(&lb);
-        randomReadLinkedBook(menu.texts, menu.minWords, menu.maxWords, menu.maxWordLen, &lb);
+        fileReadLinkedBook(file, &lb);
       } else {
         bookInit(&vb);
-        randomReadVectorBook(menu.texts, menu.minWords, menu.maxWords, menu.maxWordLen, &vb);
+        fileReadVectorBook(file, &vb);
       }
+
+      fclose(file);
       break;
     
     case 2:
@@ -114,6 +121,19 @@ int main() {
 
     case 7:
       menuToggleStruct(&menu);
+      file = fopen(menu.filename, "r+");
+
+      if(menu.vector_linked) {
+        linkedBookFree(&lb);
+        linkedBookInit(&lb);
+        fileReadLinkedBook(file, &lb);
+      } else {
+        bookInit(&vb);
+        fileReadVectorBook(file, &vb);
+      }
+
+      fclose(file);
+
       break;
     
     default: exit = 1;
