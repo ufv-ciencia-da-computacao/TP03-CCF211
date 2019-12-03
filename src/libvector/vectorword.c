@@ -37,6 +37,13 @@ int wordDeleteChar(VectorWord *word, int searched, char *deleted) {
   return 1;
 }
 
+void vectorWordToLinkedWord(LinkedWord* lw, VectorWord vw) {
+  int i;
+  for (i = 0; i < vw.size; i++) {
+    linkedWordInsert(lw, vw.character[i]);
+  }
+}
+
 int wordSize(VectorWord word) {
   return word.size;
 }

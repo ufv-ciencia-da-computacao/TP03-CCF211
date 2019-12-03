@@ -4,8 +4,9 @@
 #include "vectorword.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "../../liblinked/includes/linkedtext.h"
 
-#define MAXTAM_TEXT 100
+#define MAXTAM_TEXT 1000
 
 typedef struct vectortext_t {
   VectorWord words[MAXTAM_TEXT];
@@ -15,6 +16,7 @@ typedef struct vectortext_t {
 void textInit(VectorText *text);
 int textInsertWord(VectorText *text, VectorWord word);
 int textDeleteWord(VectorText *text, int searched, VectorWord *deleted);
+void vectorTextToLinkedText(LinkedText* lt, VectorText vt);
 int textSize(VectorText text);
 
 #endif

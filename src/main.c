@@ -124,6 +124,7 @@ int main() {
       break;
     
     default: exit = 1;
+      linkedBookFree(&lb);
       break;
     }
   }

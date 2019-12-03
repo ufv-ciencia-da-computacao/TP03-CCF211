@@ -38,6 +38,15 @@ int textDeleteWord(VectorText *text, int searched, VectorWord *deleted) {
   return 1;
 }
 
+void vectorTextToLinkedText(LinkedText* lt, VectorText vt) {
+  int i, j;
+  LinkedWord lw;
+  for (i = 0; i < vt.size; i++) {
+    vectorWordToLinkedWord(&lw, vt.words[i]);
+    linkedTextInsert(lt, lw);
+  }
+}
+
 int textSize(VectorText text) {
   return text.size;
 }

@@ -37,6 +37,15 @@ int bookDeleteText(VectorBook *book, int searched, VectorText *deleted) {
   return 1;
 }
 
+void vectorBookToLinkedBook(LinkedBook* lb, VectorBook vb) {
+  int i, j;
+  LinkedText lt;
+  for (i = 0; i < vb.size; i++) {
+    vectorTextToLinkedText(&lt, vb.texts[i]);
+    linkedBookInsert(lb, lt);
+  }
+}
+
 int  bookSize(VectorBook book) {
   return book.size;
 }
