@@ -1,7 +1,7 @@
 #include "./includes/vectorword.h"
 
 void wordInit(VectorWord *word, int cap) {
-  word->character = (char*) malloc (cap*sizeof(cap));
+  word->character = (char*) malloc (cap*sizeof(char));
   word->size = 0;
   word->capacity = cap;
 }

@@ -42,8 +42,8 @@ void randomReadVectorText(int minWords, int maxWords, int maxWordLen, VectorText
       words = minWords + (rand() % (maxWords - minWords + 1));
   VectorWord vw;
   for(i=0; i<words; i++) {
-    wordInit(&vw, words);
     wordLen = rand() % maxWordLen + 1;
+    wordInit(&vw, wordLen);
     randomReadVectorWord(wordLen, &vw);
     textInsertWord(text, vw);
   }
@@ -72,7 +72,7 @@ void randomReadLinkedText(int minWords, int maxWords, int maxWordLen, LinkedText
   LinkedWord lw;
   for(i=0; i<words; i++) {
     linkedWordInit(&lw);
-    wordLen = rand() % maxWordLen + 1;
+    wordLen = (rand() % maxWordLen) + 1;
     randomReadLinkedWord(wordLen, &lw);
     linkedTextInsert(text, lw);
   }
