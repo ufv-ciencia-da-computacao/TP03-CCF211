@@ -6,7 +6,7 @@
 #include "vectortext.h"
 #include "../../liblinked/includes/linkedbook.h"
 
-#define MAXTAM_BOOK 1000
+#define MAXTAM_BOOK 100
 
 typedef struct vectorbook_t {
   VectorText texts[MAXTAM_BOOK];

@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include "../../liblinked/includes/linkedtext.h"
 
-#define MAXTAM_TEXT 1000
+#define MAXTAM_TEXT 100
 
 typedef struct vectortext_t {
   VectorWord words[MAXTAM_TEXT];
