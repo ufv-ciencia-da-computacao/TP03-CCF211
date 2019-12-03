@@ -16,13 +16,14 @@ typedef struct {
   int maxWordLen;
   int vector_linked;
   int quick_selection;
-  char filename[FILENAME_MAX];
+  int text_book;
 } Menu;
 
 void menuInit(Menu *menu);
 int  menuShow(Menu menu);
 void menuToggleSort(Menu *menu);
-void menuToggleStruct(Menu *menu);
+void menuToggleImplementation(Menu *menu);
+void menuToggleStructure(Menu *menu);
 void menuSetParameters(Menu *menu);
 void menuContinue();
 

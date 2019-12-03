@@ -9,8 +9,6 @@
 
 int main() {
 
-  FILE *file;
-
   Menu menu;
   menuInit(&menu);
 
@@ -19,6 +17,12 @@ int main() {
 
   VectorBook vb;
   bookInit(&vb);
+
+  LinkedText lt;
+  linkedTextInit(&lt);
+
+  VectorText vt;
+  textInit(&vt);
 
   Metric metric;
   metricInit(&metric);
@@ -34,100 +38,103 @@ int main() {
     opt = menuShow(menu);
     switch (opt) {
     case 1: 
-      file = fileOpen(menu.filename, "w+");
-      randomPrintBook(menu.texts, menu.minWords, menu.maxWords, menu.maxWordLen, file);
-
-      fseek(file, 0, SEEK_SET);
-      linkedBookFree(&lb);
-      linkedBookInit(&lb);
-      fileReadLinkedBook(file, &lb);
-
-      fseek(file, 0, SEEK_SET);
-      bookInit(&vb);
-      fileReadVectorBook(file, &vb);
-
-      fclose(file);
-      break;
-    
-    case 2:
       menuSetParameters(&menu);
       break;
     
-    case 3: 
-      printf("\n");
-      if(menu.vector_linked) {
-        filePrintLinkedBook(stdout, lb);
-      } else {
-        filePrintVectorBook(stdout, vb);
-      }
-      menuContinue();
-      break;
-    
-    case 4:
-      metricInit(&metric);
-      if(menu.vector_linked) {
-        if(menu.quick_selection) {
-          selectionSortLinkedBook(lb, &metric);
-        } else {
-          quickSortLinkedBook(&lb, 0, linkedBookSize(lb)-1, &metric);
-        }
-      } else {
-        if(menu.quick_selection) {
-          selectionSortVectorBook(&vb, &metric);
-        } else {
-          quickSortVectorBook(&vb, 0, bookSize(vb)-1, &metric);
-        }
-      }
-      metricFinish(&metric);
-      printf("\n");
-      filePrintMetric(metric);
-      menuContinue();
+    case 2: 
+      menuToggleStructure(&menu);
       break;
 
+    case 3:
+      menuToggleImplementation(&menu);
+      break;
+
+    case 4:
+      menuToggleSort(&menu);
+      break;    
+
     case 5:
-      metricInit(&metric);
-      if(menu.vector_linked) {
-        length = linkedBookSize(lb);
-        if(menu.quick_selection) {
-          for(i=0; i<length; i++) {
-            selectionSortLinkedText(linkedBookGet(lb, i)->lt, &metric);
-          }
+      if(menu.text_book) {
+        if(menu.vector_linked) {
+          linkedBookFree(&lb);
+          linkedBookInit(&lb);
+          randomReadLinkedBook(menu.texts, menu.minWords, menu.maxWords, menu.maxWordLen, &lb);
         } else {
-          for(i=0; i<length; i++) {
-            quickSortLinkedText(&(linkedBookGet(lb, i)->lt), 0, linkedTextSize(linkedBookGet(lb, i)->lt)-1, &metric);
-          }
+          bookInit(&vb);
+          randomReadVectorBook(menu.texts, menu.minWords, menu.maxWords, menu.maxWordLen, &vb);
         }
       } else {
-        length = bookSize(vb);
-        if(menu.quick_selection) {
-          for(i=0; i<length; i++) {
-            selectionSortVectorText(&(vb.texts[i]), &metric);
-          }
+        if(menu.vector_linked) {
+          linkedTextFree(&lt);
+          linkedTextInit(&lt);
+          randomReadLinkedText(menu.minWords, menu.maxWords, menu.maxWordLen, &lt);
         } else {
-          for(i=0; i<length; i++) {
-            quickSortVectorText(&(vb.texts[i]), 0, textSize(vb.texts[i])-1, &metric);
-          }
+          textInit(&vt);
+          randomReadVectorText(menu.minWords, menu.maxWords, menu.maxWordLen, &vt);
         }
       }
-      metricFinish(&metric);
-      printf("\n");
-      filePrintMetric(metric);
-      menuContinue();
       break; 
     
     case 6: 
-      menuToggleSort(&menu);
+      if(menu.text_book) {
+        if(menu.vector_linked) {
+          filePrintLinkedBook(stdout, lb);
+        } else {
+          filePrintVectorBook(stdout, vb);
+        }
+      } else {
+        if(menu.vector_linked) {
+          filePrintLinkedText(stdout, lt);
+        } else {
+          filePrintVectorText(stdout, vt);
+        }
+      }
+      menuContinue();
       break;
 
     case 7:
-      menuToggleStruct(&menu);
+      metricInit(&metric);
+      if(menu.text_book) {
+          if(menu.vector_linked) {
+            if(menu.quick_selection) {
+              selectionSortLinkedBook(lb, &metric);
+            } else {
+              quickSortLinkedBook(&lb, 0, linkedBookSize(lb)-1, &metric);
+            }
+          } else {
+            if(menu.quick_selection) {
+              selectionSortVectorBook(&vb, &metric);
+            } else {
+              quickSortVectorBook(&vb, 0, bookSize(vb)-1, &metric);
+            }
+          }
+      } else {
+        if(menu.vector_linked) {
+          if(menu.quick_selection) {
+            selectionSortLinkedText(lt, &metric);
+          } else {
+            quickSortLinkedText(&lt, 0, linkedTextSize(lt)-1, &metric);
+          }
+        } else {
+          if(menu.quick_selection) {
+            selectionSortVectorText(&vt, &metric);
+          } else {
+            quickSortVectorText(&vt, 0, textSize(vt)-1, &metric);
+          }
+        }
+      }
+      metricFinish(&metric);
+      filePrintMetric(metric);
+      menuContinue();
       break;
     
     default: exit = 1;
-      linkedBookFree(&lb);
       break;
     }
   }
+
+  linkedBookFree(&lb);
+  linkedTextFree(&lt);
 
   return 0;
 }
