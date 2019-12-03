@@ -26,11 +26,11 @@ void metricAddOneComparison(Metric *metric) {
   metric->comparisons++;
 }
 
-void metricSetMoves(Metric *metric, int moves) {
+void metricSetMoves(Metric *metric, long int moves) {
   metric->moves = moves;
 }
 
-void metricSetComparisons(Metric *metric, int comparisons) {
+void metricSetComparisons(Metric *metric, long int comparisons) {
   metric->comparisons = comparisons;
 }
 

@@ -107,6 +107,6 @@ void filePrintLinkedBook(FILE *stream, LinkedBook lb) {
 
 void filePrintMetric(Metric metric) {
   printf("O algoritmo gastou %lf segundos para executar\n", metricGetSeconds(metric));
-  printf("Foram feitas %d movimentacoes\n", metricGetMoves(&metric));
-  printf("Foram feitas %d comparacoes\n", metricGetComparisons(&metric));
+  printf("Foram feitas %ld movimentacoes\n", metricGetMoves(&metric));
+  printf("Foram feitas %ld comparacoes\n", metricGetComparisons(&metric));
 }
