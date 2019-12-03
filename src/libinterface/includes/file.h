@@ -12,6 +12,8 @@
 
 #include "../../libmetric/includes/metric.h"
 
+FILE *fileOpen(char *filename, char *mode);
+
 void fileReadVectorBook(FILE *stream, VectorBook *book);
 void fileReadLinkedBook(FILE *stream, LinkedBook *book);
 

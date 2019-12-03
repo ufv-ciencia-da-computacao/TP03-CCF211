@@ -57,23 +57,6 @@ void menuSetParameters(Menu *menu) {
   scanf("%s", menu->filename);
 }
 
-void menuSetFile(char *filename, int texts, int minWords, int maxWords, int maxWordLen) {
-  FILE *file = NULL;
-  char fileDir[FILENAME_MAX] = "./inputs/";
-  char aux[FILENAME_MAX];
-
-  strcpy(aux, filename);
-  strcpy(filename, "");
-  strcat(filename, fileDir);
-  strcat(filename, aux);
-  
-  file = fopen(filename, "w+");
-  
-  randomPrintBook(texts, minWords, maxWords, maxWords, file);
-  
-  fclose(file);
-}
-
 void menuContinue() {
   printf("\npressione ENTER para continuar...\n");
   #ifdef _WIN32

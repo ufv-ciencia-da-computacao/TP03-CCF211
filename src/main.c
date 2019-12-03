@@ -34,17 +34,17 @@ int main() {
     opt = menuShow(menu);
     switch (opt) {
     case 1: 
-      menuSetFile(menu.filename, menu.texts, menu.minWords, menu.maxWords, menu.maxWordLen);
-      file = fopen(menu.filename, "r+");
+      file = fileOpen(menu.filename, "w+");
+      randomPrintBook(menu.texts, menu.minWords, menu.maxWords, menu.maxWordLen, file);
 
-      if(menu.vector_linked) {
-        linkedBookFree(&lb);
-        linkedBookInit(&lb);
-        fileReadLinkedBook(file, &lb);
-      } else {
-        bookInit(&vb);
-        fileReadVectorBook(file, &vb);
-      }
+      fseek(file, 0, SEEK_SET);
+      linkedBookFree(&lb);
+      linkedBookInit(&lb);
+      fileReadLinkedBook(file, &lb);
+
+      fseek(file, 0, SEEK_SET);
+      bookInit(&vb);
+      fileReadVectorBook(file, &vb);
 
       fclose(file);
       break;
@@ -121,19 +121,6 @@ int main() {
 
     case 7:
       menuToggleStruct(&menu);
-      file = fopen(menu.filename, "r+");
-
-      if(menu.vector_linked) {
-        linkedBookFree(&lb);
-        linkedBookInit(&lb);
-        fileReadLinkedBook(file, &lb);
-      } else {
-        bookInit(&vb);
-        fileReadVectorBook(file, &vb);
-      }
-
-      fclose(file);
-
       break;
     
     default: exit = 1;

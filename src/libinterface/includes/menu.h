@@ -24,7 +24,6 @@ int  menuShow(Menu menu);
 void menuToggleSort(Menu *menu);
 void menuToggleStruct(Menu *menu);
 void menuSetParameters(Menu *menu);
-void menuSetFile(char *filename, int texts, int minWords, int maxWords, int maxWordLen);
 void menuContinue();
 
 #endif

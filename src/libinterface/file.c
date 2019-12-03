@@ -1,5 +1,11 @@
 #include "./includes/file.h"
 
+FILE *fileOpen(char *filename, char *mode) {
+  char fdir[32] = "./inputs/";
+  strcat(fdir, filename);
+  return fopen(fdir, mode);
+}
+
 void fileReadVectorBook(FILE *stream, VectorBook *book) {
   VectorWord word;
   wordInit(&word);
