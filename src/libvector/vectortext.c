@@ -3,7 +3,7 @@
 void textInit(VectorText *text, int cap) {
   text->capacity = cap;
   text->words = (VectorWord *) malloc(cap * sizeof(VectorWord));
-  text->size = 0; 
+  text->size = 0;
 }
 
 int textInsertWord(VectorText *text, VectorWord word) {
@@ -54,6 +54,9 @@ int textSize(VectorText text) {
 }
 
 void textFree(VectorText *text) {
-  wordFree(text->words);
-  free(text);
+  int i;
+  for(i=0; i<text->size; i++) {
+    wordFree(&(text->words[i]));
+  }
+  free(text->words);
 }

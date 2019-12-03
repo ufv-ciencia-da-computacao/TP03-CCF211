@@ -53,6 +53,9 @@ int  bookSize(VectorBook book) {
 }
 
 void bookFree(VectorBook *book) {
-  textFree(book->texts);
-  free(book);
+  int i;
+  for(i=0; i<book->size; i++) {
+    textFree(&(book->texts[i]));
+  }
+  free(book->texts);
 }

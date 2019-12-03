@@ -54,5 +54,4 @@ int wordSize(VectorWord word) {
 
 void wordFree(VectorWord* word) {
   free(word->character);
-  free(word);
 }
