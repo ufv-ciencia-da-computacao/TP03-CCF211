@@ -1,7 +1,7 @@
 all: main clear
 
 main: main.o menu.o random.o metric.o file.o quicksort.o selectionsort.o vectorbook.o vectortext.o vectorword.o linkedbook.o linkedtext.o linkedword.o
-	gcc main.o menu.o random.o metric.o file.o quicksort.o selectionsort.o vectorbook.o vectortext.o vectorword.o linkedbook.o linkedtext.o linkedword.o -o main
+	gcc main.o menu.o random.o metric.o file.o quicksort.o selectionsort.o vectorbook.o vectortext.o vectorword.o linkedbook.o linkedtext.o linkedword.o
 
 main.o: main.c
 	gcc -c main.c -o main.o

@@ -1,6 +1,6 @@
 #include "./includes/file.h"
 
-FILE *fileOpen(char *filename, char *mode) {
+/*FILE *fileOpen(char *filename, char *mode) {
   char fdir[32] = "./inputs/";
   strcat(fdir, filename);
   return fopen(fdir, mode);
@@ -11,7 +11,7 @@ void fileReadVectorBook(FILE *stream, VectorBook *book) {
   wordInit(&word);
   VectorText text;
   textInit(&text);
-  char c;
+  char c; //// / / / / // / / / pera ai
   while(1) {
     c = fgetc(stream);
     if(feof(stream)) break;
@@ -54,7 +54,7 @@ void fileReadLinkedBook(FILE *stream, LinkedBook *book) {
     }
     linkedWordInsert(&word, c);
   }
-}
+} */
 
 void filePrintVectorWord(FILE *stream, VectorWord word) {
   int i;

@@ -12,10 +12,10 @@
 
 #include "../../libmetric/includes/metric.h"
 
-FILE *fileOpen(char *filename, char *mode);
+/* FILE *fileOpen(char *filename, char *mode);
 
 void fileReadVectorBook(FILE *stream, VectorBook *book);
-void fileReadLinkedBook(FILE *stream, LinkedBook *book);
+void fileReadLinkedBook(FILE *stream, LinkedBook *book);*/
 
 void filePrintVectorWord(FILE *stream, VectorWord word);
 void filePrintVectorText(FILE *stream, VectorText text);

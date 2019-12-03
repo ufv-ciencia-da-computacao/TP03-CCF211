@@ -16,13 +16,13 @@ int main() {
   linkedBookInit(&lb);
 
   VectorBook vb;
-  bookInit(&vb);
+  bookInit(&vb, 1);
 
   LinkedText lt;
   linkedTextInit(&lt);
 
   VectorText vt;
-  textInit(&vt);
+  textInit(&vt, 1);
 
   Metric metric;
   metricInit(&metric);
@@ -60,7 +60,8 @@ int main() {
           linkedBookInit(&lb);
           randomReadLinkedBook(menu.texts, menu.minWords, menu.maxWords, menu.maxWordLen, &lb);
         } else {
-          bookInit(&vb);
+          bookFree(&vb);
+          bookInit(&vb, menu.texts);
           randomReadVectorBook(menu.texts, menu.minWords, menu.maxWords, menu.maxWordLen, &vb);
         }
       } else {
@@ -69,7 +70,8 @@ int main() {
           linkedTextInit(&lt);
           randomReadLinkedText(menu.minWords, menu.maxWords, menu.maxWordLen, &lt);
         } else {
-          textInit(&vt);
+          textFree(&vt);
+          textInit(&vt, menu.maxWords);
           randomReadVectorText(menu.minWords, menu.maxWords, menu.maxWordLen, &vt);
         }
       }
@@ -135,6 +137,8 @@ int main() {
 
   linkedBookFree(&lb);
   linkedTextFree(&lt);
+  textFree(&vt);
+  bookFree(&vb);
 
   return 0;
 }

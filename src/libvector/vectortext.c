@@ -1,11 +1,13 @@
 #include "./includes/vectortext.h"
 
-void textInit(VectorText *text) {
-  text->size = 0;
+void textInit(VectorText *text, int cap) {
+  text->capacity = cap;
+  text->words = (VectorWord *) malloc(cap * sizeof(VectorWord));
+  text->size = 0; 
 }
 
 int textInsertWord(VectorText *text, VectorWord word) {
-  if (text->size == MAXTAM_TEXT) {
+  if (text->size == text->capacity) {
     return -1;
   } else {
     text->words[text->size++] = word;
@@ -49,4 +51,9 @@ void vectorTextToLinkedText(LinkedText* lt, VectorText vt) {
 
 int textSize(VectorText text) {
   return text.size;
+}
+
+void textFree(VectorText *text) {
+  wordFree(text->words);
+  free(text);
 }

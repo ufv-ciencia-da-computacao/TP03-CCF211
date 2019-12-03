@@ -1,11 +1,13 @@
 #include "./includes/vectorbook.h"
 
-void bookInit(VectorBook *book) {
+void bookInit(VectorBook *book, int cap) {
+  book->texts = (VectorText*) malloc (cap*sizeof(VectorText));
   book->size = 0;
+  book->capacity = cap;
 }
 
 int bookInsertText(VectorBook *book, VectorText text) {
-  if (book->size == MAXTAM_BOOK) {
+  if (book->size == book->capacity) {
     return -1;
   } else {
     book->texts[book->size++] = text;
@@ -48,4 +50,9 @@ void vectorBookToLinkedBook(LinkedBook* lb, VectorBook vb) {
 
 int  bookSize(VectorBook book) {
   return book.size;
+}
+
+void bookFree(VectorBook *book) {
+  textFree(book->texts);
+  free(book);
 }

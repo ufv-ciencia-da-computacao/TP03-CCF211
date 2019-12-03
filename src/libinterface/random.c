@@ -42,7 +42,7 @@ void randomReadVectorText(int minWords, int maxWords, int maxWordLen, VectorText
       words = minWords + (rand() % (maxWords - minWords + 1));
   VectorWord vw;
   for(i=0; i<words; i++) {
-    wordInit(&vw);
+    wordInit(&vw, words);
     wordLen = rand() % maxWordLen + 1;
     randomReadVectorWord(wordLen, &vw);
     textInsertWord(text, vw);
@@ -53,7 +53,7 @@ void randomReadVectorBook(int texts, int minWords, int maxWords, int maxWordLen,
   int i;
   VectorText vt;
   for(i=0; i<texts; i++) {
-    textInit(&vt);
+    textInit(&vt, texts);
     randomReadVectorText(minWords, maxWords, maxWordLen, &vt);
     bookInsertText(book, vt);
   }
