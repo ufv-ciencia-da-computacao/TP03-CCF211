@@ -72,7 +72,7 @@ int main() {
         } else {
           textFree(&vt);
           textInit(&vt, menu.maxWords);
-          randomReadVectorText(menu.minWords, menu.maxWords, menu.maxWordLen, &vt);
+          randomReadVectorText(randomInterval(menu.minWords, menu.maxWords), menu.maxWordLen, &vt);
         }
       }
       break; 
