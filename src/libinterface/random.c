@@ -33,16 +33,15 @@ void randomPrintBook(int texts, int minWords, int maxWords, int maxWordLen, FILE
 void randomReadVectorWord(int length, VectorWord *word) {
   int i;
   for(i=0; i<length; i++) {
-    wordInsertChar(word, (char) ((rand() % 26) + (rand() % 2 ? 'A' : 'a')));
+    wordInsertChar(word, (char) (randomInterval(0, 25) + (randomInterval(0, 1) ? 'A' : 'a')));
   }
 }
 
-void randomReadVectorText(int minWords, int maxWords, int maxWordLen, VectorText *text) {
-  int i, wordLen, 
-      words = minWords + (rand() % (maxWords - minWords + 1));
+void randomReadVectorText(int words, int maxWordLen, VectorText *text) {
+  int i, wordLen; 
   VectorWord vw;
   for(i=0; i<words; i++) {
-    wordLen = rand() % maxWordLen + 1;
+    wordLen = randomInterval(1, maxWordLen);
     wordInit(&vw, wordLen);
     randomReadVectorWord(wordLen, &vw);
     textInsertWord(text, vw);
@@ -50,11 +49,11 @@ void randomReadVectorText(int minWords, int maxWords, int maxWordLen, VectorText
 }
 
 void randomReadVectorBook(int texts, int minWords, int maxWords, int maxWordLen, VectorBook *book) {
-  int i;
+  int i, words = randomInterval(minWords, maxWords);
   VectorText vt;
   for(i=0; i<texts; i++) {
-    textInit(&vt, texts);
-    randomReadVectorText(minWords, maxWords, maxWordLen, &vt);
+    textInit(&vt, words);
+    randomReadVectorText(words, maxWordLen, &vt);
     bookInsertText(book, vt);
   }
 }
@@ -88,3 +87,6 @@ void randomReadLinkedBook(int texts, int minWords, int maxWords, int maxWordLen,
   }
 }
 
+int randomInterval(int min, int max) {
+  return min + (rand() % (max - min + 1));
+}
