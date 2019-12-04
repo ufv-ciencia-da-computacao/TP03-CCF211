@@ -103,7 +103,10 @@ static void _partitionLinkedText(LinkedText *linkedText, int l, int r, int *i, i
   *i = l;
   *j = r;
 
-  LinkedWord pivo = linkedTextGet(*linkedText, ((*i + *j)/2))->lw;
+  WordNode pivo = linkedText->head;
+  WordNode itI;
+  WordNode itJ;
+  // linkedTextGet(*linkedText, ((*i + *j)/2))->lw;
 
   do {
     while (tolower(pivo->c) > tolower(linkedTextGet(*linkedText, *i)->lw->c)) {

@@ -1,82 +1,97 @@
 #include "includes/linkedword.h"
 
 static int isEmpty(LinkedWord lw) {
-  return lw == NULL;
+  return lw.size == 0;
 }
 
-static LinkedWord create(char c) {
-  LinkedWord new = (LinkedWord) malloc(sizeof(struct word_t));
+static WordNode create(char c) {
+  WordNode new = (WordNode ) malloc(sizeof(struct word_t));
   new->next = NULL;
+  new->prev = NULL;
   new->c = c;
+
   return new;
 }
 
 void linkedWordInit(LinkedWord *lw) {
-  *lw = NULL;
+  lw->head = NULL;
+  lw->tail = NULL;
+  lw->size = 0;
 }
 
 void linkedWordInsert(LinkedWord *lw, char c) {
-  LinkedWord iterator = *lw;
-  if(isEmpty(*lw)) {
-    *lw = create(c);
+  WordNode new = create(c);
+  WordNode last = lw->tail;
+  if (isEmpty(*lw)) {
+    lw->head = new;
   } else {
-    while (iterator->next != NULL) {
-      iterator = iterator->next;
-    }
-    iterator->next = create(c);
+    new->prev = last;
+    last->next = new;
   }
+  lw->tail = new;
+  lw->size++;
 }
 
-LinkedWord linkedWordGet(LinkedWord lw, int index) {
-  LinkedWord iterator = lw;
-  int i;
-  for(i=0; i<index; i++) {
-    if(isEmpty(iterator)) return NULL;
-    iterator = iterator->next;
-  }
-  return iterator;
+WordNode linkedWordNext(WordNode wn) {
+  return wn->next;
 }
 
-void linkedWordRemove(LinkedWord *lw, int index) {
-  if(isEmpty(*lw)) return; 
-  LinkedWord iterator = *lw, prev = NULL;
-  int i;
-  for(i=0; i<index; i++) {
-    if(iterator == NULL) break;
-    prev = iterator;
-    iterator = iterator->next;
-  }
-  if(i == index) {
-    if(prev == NULL) {
-      *lw = iterator->next;
-    } else {
-      prev->next = iterator->next;
-    }
-    free(iterator);
-  }
+WordNode linkedWordPrev(WordNode wn) {
+  return wn->prev;
+}
+
+void linkedWordRemove(LinkedWord *lw, WordNode index) {
+  WordNode indexPrev = index->prev;
+  WordNode indexNext = index->next;
+
+  if (indexPrev != NULL) indexPrev->next = indexNext;
+  else lw->head = indexNext;
+
+  if (indexNext != NULL) indexNext->prev = indexPrev;
+  else lw->tail = indexPrev;
+     
+  free(index);
+
+  lw->size--;
 }
 
 int  linkedWordSize(LinkedWord lw) {
-  if(isEmpty(lw)) return 0;
-  LinkedWord iterator = lw;
-  int size = 0;
-  while(iterator != NULL) {
-    size++;
-    iterator = iterator->next;
-  }
-  return size;
+  return lw.size;
 }
 
-void linkedWordSwap(LinkedWord *lw, int i, int j) {
-  LinkedWord aux1 = linkedWordGet(*lw, i);
-  LinkedWord aux2 = linkedWordGet(*lw, j);
-  char swap = aux1->c;
-  aux1->c = aux2->c;
-  aux2->c = swap;
+void linkedWordSwap(LinkedWord *lw, WordNode a, WordNode b) {
+  if (a == b) return;
+
+  WordNode temp;
+  WordNode pa = a->prev;
+  WordNode na = a->next;
+  WordNode pb = b->prev;
+  WordNode nb = b->next;
+  
+  if(pa != NULL) pa->next = b;
+  else lw->head = b;
+
+  if(na != NULL) na->prev = b;
+  else lw->tail = b;
+  
+  if(pb != NULL) pb->next = a;
+  else lw->head = a;
+  
+  if(nb != NULL) pb->prev = a;
+  else lw->tail = a;
+
+
+  temp = a->next;
+  a->next = b->next;
+  b->next = temp;
+  
+  temp = a->prev;
+  a->prev = b->prev;
+  b->prev = temp;
 }
 
 void linkedWordFree(LinkedWord *lw) {
-  while(!isEmpty(*lw)) {
-    linkedWordRemove(lw, 0);
+  while (!isEmpty(*lw)) {
+    linkedWordRemove(lw, lw->head);
   }
 }

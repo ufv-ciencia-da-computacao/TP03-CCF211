@@ -80,7 +80,7 @@ void filePrintVectorBook(FILE *stream, VectorBook book) {
 }
 
 void filePrintLinkedWord(FILE *stream, LinkedWord lw) {
-  LinkedWord iterator = lw;
+  WordNode iterator = lw.head;
   while (iterator != NULL) {
     fprintf(stream, "%c", iterator->c);
     iterator = iterator->next;
@@ -88,7 +88,7 @@ void filePrintLinkedWord(FILE *stream, LinkedWord lw) {
 }
 
 void filePrintLinkedText(FILE *stream, LinkedText lt) {
-  LinkedText iterator = lt;
+  TextNode iterator = lt.head;
   while(iterator != NULL) {
     filePrintLinkedWord(stream, iterator->lw);
     fprintf(stream, iterator->next != NULL ? " " : "");
@@ -97,7 +97,7 @@ void filePrintLinkedText(FILE *stream, LinkedText lt) {
 }
 
 void filePrintLinkedBook(FILE *stream, LinkedBook lb) {
-  LinkedBook iterator = lb;
+  BookNode iterator = lb.head;
   while(iterator != NULL) {
     filePrintLinkedText(stream, iterator->lt);
     fprintf(stream, "\n");

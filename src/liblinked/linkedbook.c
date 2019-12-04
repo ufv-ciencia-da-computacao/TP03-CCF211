@@ -1,89 +1,97 @@
 #include "includes/linkedbook.h"
 
 static int isEmpty(LinkedBook lb) {
-  return lb == NULL;
+  return lb.size == 0;
 }
 
-static LinkedBook create(LinkedText lt) {
-  LinkedBook new = (LinkedBook) malloc(sizeof(struct book_t));
+static BookNode create(LinkedText linkedText) {
+  BookNode new = (BookNode) malloc(sizeof(struct book_t));
   new->next = NULL;
-  new->lt = lt;
+  new->prev = NULL;
+  new->lt = linkedText;
   return new;
 }
 
 void linkedBookInit(LinkedBook *lb) {
-  *lb = NULL;
+  lb->head = NULL;
+  lb->tail = NULL;
+  lb->size = 0;
 }
 
 void linkedBookInsert(LinkedBook *lb, LinkedText lt) {
-  LinkedBook iterator = *lb;
-  if(isEmpty(*lb)) {
-    *lb = create(lt);
+  BookNode new = create(lt);
+  BookNode last = lb->tail;
+  if (isEmpty(*lb)) {
+    lb->head = new;
   } else {
-    while (iterator->next != NULL) {
-      iterator = iterator->next;
-    }
-    iterator->next = create(lt);
+    new->prev = last;
+    last->next = new;
   }
+  lb->tail = new;
+  lb->size++;
 }
 
-void linkedBookRemove(LinkedBook *lb, int index) {
-  if(isEmpty(*lb)) return; 
-  LinkedBook iterator = *lb, prev = NULL;
-  int i;
-  for(i=0; i<index; i++) {
-    if(iterator == NULL) break;
-    prev = iterator;
-    iterator = iterator->next;
-  }
-  if(i == index) {
-    if(prev == NULL) {
-      *lb = iterator->next;
-    } else {
-      prev->next = iterator->next;
-    }
-    linkedTextFree(&(iterator->lt));
-    free(iterator);
-  }
+BookNode linkedBookNext(BookNode bn) {
+  return bn->next;
+}
+
+BookNode linkedBookPrev(BookNode bn) {
+  return bn->prev;
+}
+
+void linkedBookRemove(LinkedBook *lb, BookNode index) {
+  BookNode indexPrev = index->prev;
+  BookNode indexNext = index->next;
+
+  if (indexPrev != NULL) indexPrev->next = indexNext;
+  else lb->head = indexNext;
+
+  if (indexNext != NULL) indexNext->prev = indexPrev;
+  else lb->tail = indexPrev;
+     
+  linkedTextFree(&(index->lt));
+  free(index);
+
+  lb->size--;
 }
 
 int  linkedBookSize(LinkedBook lb) {
-  if(isEmpty(lb)) return 0;
-  LinkedBook iterator = lb;
-  int size = 0;
-  while(iterator != NULL) {
-    size++;
-    iterator = iterator->next;
-  }
-  return size;
+  return lb.size;
 }
 
-void linkedBookSwap(LinkedBook *lb, int i, int j) {
-  LinkedBook aux1 = linkedBookGet(*lb, i);
-  LinkedBook aux2 = linkedBookGet(*lb, j);
-  LinkedText swap = aux1->lt;
-  aux1->lt = aux2->lt;
-  aux2->lt = swap;
-}
+void linkedBookSwap(LinkedBook *lb, BookNode a, BookNode b) {
+  if (a == b) return;
 
-LinkedBook linkedBookGet(LinkedBook lb, int index) {
-  LinkedBook iterator = lb;
-  int count = 0;
+  BookNode temp;
+  BookNode pa = a->prev;
+  BookNode na = a->next;
+  BookNode pb = b->prev;
+  BookNode nb = b->next;
   
-  while (iterator != NULL) {
-    if (count == index) {
-      return iterator;
-    }
-    count++;
-    iterator = iterator->next;
-  }
+  if(pa != NULL) pa->next = b;
+  else lb->head = b;
 
-  return NULL;
+  if(na != NULL) na->prev = b;
+  else lb->tail = b;
+  
+  if(pb != NULL) pb->next = a;
+  else lb->head = a;
+  
+  if(nb != NULL) pb->prev = a;
+  else lb->tail = a;
+
+
+  temp = a->next;
+  a->next = b->next;
+  b->next = temp;
+  
+  temp = a->prev;
+  a->prev = b->prev;
+  b->prev = temp;
 }
-
 
 void linkedBookFree(LinkedBook *lb) {
-  while(!isEmpty(*lb)) {
-    linkedBookRemove(lb, 0);
+  while (!isEmpty(*lb)) {
+    linkedBookRemove(lb, lb->head);
   }
 }

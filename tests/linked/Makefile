@@ -1,22 +1,20 @@
 all: main clear
 
-main: main.o test.o linkedbook.o linkedtext.o linkedword.o
-	gcc main.o test.o linkedbook.o linkedtext.o linkedword.o -o main
+main: main.o linkedword.o linkedtext.o linkedbook.o
+	gcc main.o linkedword.o linkedtext.o linkedbook.o -o main
 
 main.o: main.c
 	gcc -c main.c -o main.o
 
-test.o: ../../libtest/test.c
-	gcc -c ../../libtest/test.c -o test.o
+linkedbook.o: ../../src/liblinked/linkedbook.c
+	gcc -c ../../src/liblinked/linkedbook.c -o linkedbook.o
 
-linkedbook.o: ../../liblinked/linkedbook.c
-	gcc -c ../../liblinked/linkedbook.c -o linkedbook.o
+linkedtext.o: ../../src/liblinked/linkedtext.c
+	gcc -c ../../src/liblinked/linkedtext.c -o linkedtext.o
 
-linkedtext.o: ../../liblinked/linkedtext.c
-	gcc -c ../../liblinked/linkedtext.c -o linkedtext.o
-
-linkedword.o: ../../liblinked/linkedword.c
-	gcc -c ../../liblinked/linkedword.c -o linkedword.o
+linkedword.o: ../../src/liblinked/linkedword.c
+	gcc -c ../../src/liblinked/linkedword.c -o linkedword.o
 
 clear:
-	del *.o
+	# del *.o
+	rm *.o

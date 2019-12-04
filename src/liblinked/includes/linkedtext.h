@@ -2,22 +2,28 @@
 #define __LINKED_TEXT_H__
 
 #include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
 #include "linkedword.h"
 
-typedef struct text_t * LinkedText;
+typedef struct text_t * TextNode;
 struct text_t {
   LinkedWord lw;
-  LinkedText next;
+  TextNode next;
+  TextNode prev;
 };
+
+typedef struct {
+  TextNode head;
+  TextNode tail;
+  int size;
+} LinkedText;
 
 void linkedTextInit(LinkedText *lt);
 void linkedTextInsert(LinkedText *lt, LinkedWord lw);
-void linkedTextRemove(LinkedText *lt, int index);
-LinkedText linkedTextGet(LinkedText lt, int index);
+void linkedTextRemove(LinkedText *lt, TextNode index);
+TextNode linkedTextPrev(TextNode tn);
+TextNode linkedTextNext(TextNode tn);
 int  linkedTextSize(LinkedText lt);
-void linkedTextSwap(LinkedText *lt, int i, int j);
+void linkedTextSwap(LinkedText *lt, TextNode a, TextNode b);
 void linkedTextFree(LinkedText *lt);
 
 #endif

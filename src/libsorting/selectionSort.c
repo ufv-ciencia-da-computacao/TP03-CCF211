@@ -41,39 +41,37 @@ void selectionSortVectorText(VectorText *arr, Metric *metric) {
 }
 
 void selectionSortLinkedText(LinkedText linkedText, Metric *metric) {
-  int min;
-  int i, j;
-  int length = linkedTextSize(linkedText);
+  TextNode itI, itJ;
+  TextNode min;
 
-  for (i = 0; i < length-1; i++) {
-    min = i;
-    for (j = i+1; j < length; j++) {
-      if (tolower(linkedTextGet(linkedText, j)->lw->c) < tolower(linkedTextGet(linkedText, min)->lw->c)) {
-        min = j;
+  for (itI = linkedText.head; itI->next != NULL; itI = itI->next) {
+    min = itI;
+    for (itJ = itI->next; itJ != NULL; itJ = itJ->next) {
+      if (tolower(itI->lw.head->c) < tolower(itJ->lw.head->c)) {
+        min = itJ;
       }
       metricSetComparisons(metric, metricGetComparisons(metric) + 1);
     }
 
-    linkedTextSwap(&linkedText, i, min);
+    linkedTextSwap(&linkedText, itI, min);
     metricSetMoves(metric, metricGetMoves(metric) + 1); // swap move
   } 
 }
 
 void selectionSortLinkedBook(LinkedBook linkedBook, Metric *metric) {
-  int min;
-  int i, j;
-  int length = linkedBookSize(linkedBook);
+  BookNode min;
+  BookNode itI, itJ;
 
-  for (i = 0; i < length-1; i++) {
-    min = i;
-    for (j = i+1; j < length; j++) {
-      if (linkedTextSize(linkedBookGet(linkedBook, j)->lt) < linkedTextSize(linkedBookGet(linkedBook, min)->lt)) {
-        min = j;
+  for (itI = linkedBook.head; itI->next != NULL; itI = itI->next) {
+    min = itI;
+    for (itJ = itI->next; itJ != NULL; itJ = itJ->next) {
+      if (itJ->lt.size < min->lt.size) {
+        min = itJ;
       }
       metricSetComparisons(metric, metricGetComparisons(metric) + 1);
     }
 
-    linkedBookSwap(&linkedBook, i, min);
+    linkedBookSwap(&linkedBook, itI, min);
     metricSetMoves(metric, metricGetMoves(metric) + 1); // swap move
   } 
 }
