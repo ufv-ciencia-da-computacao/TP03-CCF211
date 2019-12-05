@@ -65,7 +65,7 @@ void selectionSortLinkedBook(LinkedBook *linkedBook, Metric *metric) {
   BookNode min;
   BookNode itI, itJ;
 
-  for (itI = linkedBook->head; itI->next != NULL; itI = itI->next) {
+  for (itI = linkedBook->head; itI->next != NULL; itI = min->next) {
     min = itI;
     for (itJ = itI->next; itJ != NULL; itJ = itJ->next) {
       if (itJ->lt.size < min->lt.size) {

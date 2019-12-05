@@ -1,7 +1,7 @@
 #include "./includes/random.h"
 
 void randomInit() {
-  srand(time(0));
+  srand(time(NULL));
 }
 
 void randomPrintWord(int length, FILE *stream) {
@@ -49,9 +49,10 @@ void randomReadVectorText(int words, int maxWordLen, VectorText *text) {
 }
 
 void randomReadVectorBook(int texts, int minWords, int maxWords, int maxWordLen, VectorBook *book) {
-  int i, words = randomInterval(minWords, maxWords);
+  int i, words;
   VectorText vt;
   for(i=0; i<texts; i++) {
+    words = randomInterval(minWords, maxWords);
     textInit(&vt, words);
     randomReadVectorText(words, maxWordLen, &vt);
     bookInsertText(book, vt);
@@ -77,9 +78,10 @@ void randomReadLinkedText(int words, int maxWordLen, LinkedText *text) {
 }
 
 void randomReadLinkedBook(int texts, int minWords, int maxWords, int maxWordLen, LinkedBook *book) {
-  int i, words = randomInterval(minWords, maxWords);
+  int i, words;
   LinkedText lt;
   for(i=0; i<texts; i++) {
+    words = randomInterval(minWords, maxWords);
     linkedTextInit(&lt);
     randomReadLinkedText(words, maxWordLen, &lt);
     linkedBookInsert(book, lt);

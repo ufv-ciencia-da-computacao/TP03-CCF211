@@ -85,7 +85,7 @@ static void _partitionLinkedBook(LinkedBook *linkedBook, BookNode *head, BookNod
     }
 
     if ((*head)->index <= (*tail)->index) {
-      // linkedBookSwap(linkedBook, *head, *tail);
+      linkedBookSwap(linkedBook, *head, *tail);
 
       *head = (*head)->next;
       *tail = (*tail)->prev;
