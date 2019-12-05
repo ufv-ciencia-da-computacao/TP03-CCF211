@@ -1,89 +1,100 @@
 #include "includes/linkedtext.h"
 
 static int isEmpty(LinkedText lt) {
-  return lt == NULL;
+  return lt.size == 0;
 }
 
-static LinkedText create(LinkedWord lw) {
-  LinkedText new = (LinkedText) malloc(sizeof(struct text_t));
+static TextNode create(LinkedWord linkedword) {
+  TextNode new = (TextNode) malloc(sizeof(struct text_t));
   new->next = NULL;
-  new->lw = lw;
+  new->prev = NULL;
+  new->lw = linkedword;
   return new;
 }
 
 void linkedTextInit(LinkedText *lt) {
-  *lt = NULL;
+  lt->head = NULL;
+  lt->tail = NULL;
+  lt->size = 0;
 }
 
-void linkedTextInsert(LinkedText *lt, LinkedWord lw) {
-  LinkedText iterator = *lt;
-  if(isEmpty(*lt)) {
-    *lt = create(lw);
+void linkedTextInsert(LinkedText *lt, LinkedWord tn) {
+  TextNode new = create(tn);
+  if (isEmpty(*lt)) {
+    lt->head = new;
   } else {
-    while (iterator->next != NULL) {
-      iterator = iterator->next;
-    }
-    iterator->next = create(lw);
+    new->prev = lt->tail;
+    lt->tail->next = new;
   }
+  new->index = lt->size;
+  lt->tail = new;
+  lt->size++;
 }
 
-void linkedTextRemove(LinkedText *lt, int index) {
-  if(isEmpty(*lt)) return; 
-  LinkedText iterator = *lt, prev = NULL;
-  int i;
-  for(i=0; i<index; i++) {
-    if(iterator == NULL) break;
-    prev = iterator;
-    iterator = iterator->next;
-  }
-  if(i == index) {
-    if(prev == NULL) {
-      *lt = iterator->next;
-    } else {
-      prev->next = iterator->next;
-    }
-    linkedWordFree(&(iterator->lw));
-    free(iterator);
-  }
+TextNode linkedTextNext(TextNode tn) {
+  return tn->next;
 }
 
-LinkedText linkedTextGet(LinkedText lt, int index) {
-  LinkedText iterator = lt;
-  int count = 0;
+TextNode linkedTextPrev(TextNode tn) {
+  return tn->prev;
+}
+
+void linkedTextRemove(LinkedText *lt, TextNode index) {
+  TextNode indexPrev = index->prev;
+  TextNode indexNext = index->next;
+
+  if (indexPrev != NULL) indexPrev->next = indexNext;
+  else lt->head = indexNext;
+
+  if (indexNext != NULL) indexNext->prev = indexPrev;
+  else lt->tail = indexPrev;
+     
+  linkedWordFree(&(index->lw));
+  free(index);
+
+  lt->size--;
+}
+
+int  linkedTextSize(LinkedText lt) {
+  return lt.size;
+}
+
+void linkedTextSwap(LinkedText *lt, TextNode a, TextNode b) {
+  if (a == b) return;
+
+  TextNode temp;
+  TextNode pa = a->prev;
+  TextNode na = a->next;
+  TextNode pb = b->prev;
+  TextNode nb = b->next;
   
-  while (iterator != NULL) {
-    if (count == index) {
-      return iterator;
-    }
-    count++;
-    iterator = iterator->next;
-  }
+  if(pa != NULL) pa->next = b;
+  else lt->head = b;
 
-  return NULL;
-}
+  if(na != NULL) na->prev = b;
+  else lt->tail = b;
+  
+  if(pb != NULL) pb->next = a;
+  else lt->head = a;
+  
+  if(nb != NULL) nb->prev = a;
+  else lt->tail = a;
 
-int linkedTextSize(LinkedText lt) {
-  if(isEmpty(lt)) return 0;
-  LinkedText iterator = lt;
-  int size = 0;
-  while(iterator != NULL) {
-    size++;
-    iterator = iterator->next;
-  }
-  return size;
-}
+  temp = a->next;
+  a->next = b->next;
+  b->next = temp;
+  
+  temp = a->prev;
+  a->prev = b->prev;
+  b->prev = temp;
 
-void linkedTextSwap(LinkedText *lt, int i, int j) {
-  LinkedText aux1 = linkedTextGet(*lt, i);
-  LinkedText aux2 = linkedTextGet(*lt, j);
-  LinkedWord swap = aux1->lw;
-  aux1->lw = aux2->lw;
-  aux2->lw = swap;
+  int indexAux = a->index;
+  a->index = b->index;
+  b->index = indexAux;
 }
 
 void linkedTextFree(LinkedText *lt) {
-  while(!isEmpty(*lt)) {
-    linkedTextRemove(lt, 0);
+  while (!isEmpty(*lt)) {
+    linkedTextRemove(lt, lt->head);
   }
 }
-

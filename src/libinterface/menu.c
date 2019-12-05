@@ -1,11 +1,11 @@
 #include "./includes/menu.h"
 
 void menuInit(Menu *menu) {
-  menu->texts = 5;
-  menu->minWords = 1;
-  menu->maxWords = 10;
-  menu->maxWordLen = 5;
-  menu->vector_linked = 0;
+  menu->texts = 1000;
+  menu->minWords = 10;
+  menu->maxWords = 100;
+  menu->maxWordLen = 1;
+  menu->vector_linked = 1;
   menu->quick_selection = 0;
   menu->text_book = 0;
 }

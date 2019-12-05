@@ -24,7 +24,7 @@ void randomReadVectorWord(int length, VectorWord *word);
 void randomReadVectorText(int words, int maxWordLen, VectorText *text);
 void randomReadVectorBook(int texts, int minWords, int maxWords, int maxWordLen, VectorBook *book);
 void randomReadLinkedWord(int length, LinkedWord *word);
-void randomReadLinkedText(int minWords, int maxWords, int maxWordLen, LinkedText *text);
+void randomReadLinkedText(int words, int maxWordLen, LinkedText *text);
 void randomReadLinkedBook(int texts, int minWords, int maxWords, int maxWordLen, LinkedBook *book);
 
 int randomInterval(int min, int max);

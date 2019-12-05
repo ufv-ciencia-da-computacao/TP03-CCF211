@@ -68,7 +68,7 @@ int main() {
         if(menu.vector_linked) {
           linkedTextFree(&lt);
           linkedTextInit(&lt);
-          randomReadLinkedText(menu.minWords, menu.maxWords, menu.maxWordLen, &lt);
+          randomReadLinkedText(randomInterval(menu.minWords, menu.maxWords), menu.maxWordLen, &lt);
         } else {
           textFree(&vt);
           textInit(&vt, menu.maxWords);
@@ -99,9 +99,9 @@ int main() {
       if(menu.text_book) {
           if(menu.vector_linked) {
             if(menu.quick_selection) {
-              selectionSortLinkedBook(lb, &metric);
+              selectionSortLinkedBook(&lb, &metric);
             } else {
-              quickSortLinkedBook(&lb, 0, linkedBookSize(lb)-1, &metric);
+              quickSortLinkedBook(&lb, lb.head, lb.tail, &metric);
             }
           } else {
             if(menu.quick_selection) {
@@ -113,9 +113,10 @@ int main() {
       } else {
         if(menu.vector_linked) {
           if(menu.quick_selection) {
-            selectionSortLinkedText(lt, &metric);
+            selectionSortLinkedText(&lt, &metric);
           } else {
-            quickSortLinkedText(&lt, 0, linkedTextSize(lt)-1, &metric);
+            quickSortLinkedText(&lt, lt.head, lt.tail, &metric);
+            // quickSort(lt, lt.head, lt.tail);
           }
         } else {
           if(menu.quick_selection) {

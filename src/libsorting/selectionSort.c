@@ -1,4 +1,5 @@
 #include "./includes/selectionSort.h"
+#include <stdio.h>
 
 void selectionSortVectorBook(VectorBook *arr, Metric *metric) {
   int min;
@@ -40,40 +41,39 @@ void selectionSortVectorText(VectorText *arr, Metric *metric) {
   } 
 }
 
-void selectionSortLinkedText(LinkedText linkedText, Metric *metric) {
-  int min;
-  int i, j;
-  int length = linkedTextSize(linkedText);
+void selectionSortLinkedText(LinkedText *linkedText, Metric *metric) {
+  TextNode itI, itJ;
+  TextNode min;
 
-  for (i = 0; i < length-1; i++) {
-    min = i;
-    for (j = i+1; j < length; j++) {
-      if (tolower(linkedTextGet(linkedText, j)->lw->c) < tolower(linkedTextGet(linkedText, min)->lw->c)) {
-        min = j;
+  for (itI = linkedText->head; itI->next != NULL; itI = min->next) {
+    min = itI;
+    for (itJ = itI->next; itJ != NULL; itJ = itJ->next) {
+      if (tolower(itJ->lw.head->c) < tolower(min->lw.head->c)) {
+        min = itJ;
       }
       metricSetComparisons(metric, metricGetComparisons(metric) + 1);
     }
-
-    linkedTextSwap(&linkedText, i, min);
-    metricSetMoves(metric, metricGetMoves(metric) + 1); // swap move
+    if (min != linkedText->head) {
+      linkedTextSwap(linkedText, itI, min);
+    }
+    
+    metricSetMoves(metric, metricGetMoves(metric) + 1);
   } 
 }
 
-void selectionSortLinkedBook(LinkedBook linkedBook, Metric *metric) {
-  int min;
-  int i, j;
-  int length = linkedBookSize(linkedBook);
+void selectionSortLinkedBook(LinkedBook *linkedBook, Metric *metric) {
+  BookNode min;
+  BookNode itI, itJ;
 
-  for (i = 0; i < length-1; i++) {
-    min = i;
-    for (j = i+1; j < length; j++) {
-      if (linkedTextSize(linkedBookGet(linkedBook, j)->lt) < linkedTextSize(linkedBookGet(linkedBook, min)->lt)) {
-        min = j;
+  for (itI = linkedBook->head; itI->next != NULL; itI = min->next) {
+    min = itI;
+    for (itJ = itI->next; itJ != NULL; itJ = itJ->next) {
+      if (itJ->lt.size < min->lt.size) {
+        min = itJ;
       }
       metricSetComparisons(metric, metricGetComparisons(metric) + 1);
     }
-
-    linkedBookSwap(&linkedBook, i, min);
+    linkedBookSwap(linkedBook, itI, min);
     metricSetMoves(metric, metricGetMoves(metric) + 1); // swap move
   } 
 }

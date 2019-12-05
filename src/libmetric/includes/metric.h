@@ -10,8 +10,8 @@ typedef struct metric_t {
 } Metric;
 
 void metricInit(Metric *metric);
-int metricGetMoves(Metric *metric);
-int metricGetComparisons(Metric *metric);
+long int metricGetMoves(Metric *metric);
+long int metricGetComparisons(Metric *metric);
 double metricGetSeconds(Metric metric);
 void metricSetMoves(Metric *metric, long int moves);
 void metricSetComparisons(Metric *metric, long int comparisons);

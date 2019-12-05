@@ -6,11 +6,11 @@ void metricInit(Metric *metric) {
   metric->time = clock();
 }
 
-int metricGetMoves(Metric *metric) {
+long int metricGetMoves(Metric *metric) {
   return metric->moves;
 }
 
-int metricGetComparisons(Metric *metric) {
+long int metricGetComparisons(Metric *metric) {
   return metric->comparisons;
 }
 

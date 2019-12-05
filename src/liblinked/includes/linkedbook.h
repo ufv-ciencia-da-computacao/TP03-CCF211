@@ -2,22 +2,29 @@
 #define __LINKED_BOOK_H__
 
 #include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
 #include "linkedtext.h"
 
-typedef struct book_t * LinkedBook;
+typedef struct book_t * BookNode;
 struct book_t {
   LinkedText lt;
-  LinkedBook next;
+  BookNode next;
+  BookNode prev;
+  int index;
 };
+
+typedef struct {
+  BookNode head;
+  BookNode tail;
+  int size;
+} LinkedBook;
 
 void linkedBookInit(LinkedBook *lb);
 void linkedBookInsert(LinkedBook *lb, LinkedText lt);
-void linkedBookRemove(LinkedBook *lb, int index);
-LinkedBook linkedBookGet(LinkedBook lb, int index);
+void linkedBookRemove(LinkedBook *lb, BookNode index);
+BookNode linkedBookPrev(BookNode bn);
+BookNode linkedBookNext(BookNode bn);
 int  linkedBookSize(LinkedBook lb);
-void linkedBookSwap(LinkedBook *lb, int i, int j);
+void linkedBookSwap(LinkedBook *lb, BookNode a, BookNode b);
 void linkedBookFree(LinkedBook *lb);
 
 #endif
