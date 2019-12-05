@@ -101,7 +101,7 @@ int main() {
             if(menu.quick_selection) {
               selectionSortLinkedBook(&lb, &metric);
             } else {
-              quickSortLinkedBook(&lb, &metric);
+              quickSortLinkedBook(&lb, lb.head, lb.tail, &metric);
             }
           } else {
             if(menu.quick_selection) {
@@ -116,6 +116,7 @@ int main() {
             selectionSortLinkedText(&lt, &metric);
           } else {
             quickSortLinkedText(&lt, lt.head, lt.tail, &metric);
+            // quickSort(lt, lt.head, lt.tail);
           }
         } else {
           if(menu.quick_selection) {
