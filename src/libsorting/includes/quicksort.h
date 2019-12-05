@@ -17,6 +17,6 @@
 void quickSortVectorBook(VectorBook *book, int l, int r, Metric *metric);
 void quickSortVectorText(VectorText *text, int l, int r, Metric *metric);
 void quickSortLinkedBook(LinkedBook *lb, Metric *metric);
-void quickSortLinkedText(LinkedText *lt, Metric *metric);
+void quickSortLinkedText(LinkedText *lt, TextNode l, TextNode r, Metric *metric);
 
 #endif

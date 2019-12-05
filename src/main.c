@@ -115,7 +115,7 @@ int main() {
           if(menu.quick_selection) {
             selectionSortLinkedText(&lt, &metric);
           } else {
-            quickSortLinkedText(&lt, &metric);
+            quickSortLinkedText(&lt, lt.head, lt.tail, &metric);
           }
         } else {
           if(menu.quick_selection) {
