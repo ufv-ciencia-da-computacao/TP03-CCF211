@@ -32,26 +32,46 @@ void filePrintLinkedBook(FILE *stream, LinkedBook lb) {
 int main() {
 
   LinkedWord lw;
-  LinkedText lt;
-  LinkedBook lb;
 
-  linkedBookInit(&lb);
+  LinkedText lt;
+  linkedTextInit(&lt);
 
   int i, j, k;
-  for(i=0; i<100000; i++) {
-    linkedTextInit(&lt);
-    for(j=0; j<50000; j++) {
+  //for(i=0; i<10; i++) {
+    // linkedTextInit(&lt);
+    for(j=0; j<10; j++) {
       linkedWordInit(&lw);
-      for(k=0; k<7; k++) {
-        linkedWordInsert(&lw, (char) 'a' + (i + j + k)%26 );
+      for(k=0; k<9; k++) {
+        
+        linkedWordInsert(&lw, (char) 'z' - (i + j + k)%26 );
       }
+      
       linkedTextInsert(&lt, lw);
     }
-    linkedBookInsert(&lb, lt);
-  }
-  printf("..");
+    // linkedBookInsert(&lb, lt);
+  // }
 
-  // filePrintLinkedBook(stdout, lb);
-  linkedBookFree(&lb);
+  // // linkedTextSwap(&lt, lt.head, lt.tail);
+
+  TextNode t1 = lt.head, t2;
+
+  // F  1 2 3 4 5 6 0
+  // t2 
+  
+  while(t1 != NULL) {
+    t2 = lt.tail;
+    linkedTextSwap(&lt, t1, lt.tail);
+    t1 = t2->next;
+    printf(",");
+  }
+
+  // filePrintLinkedText(stdout, lt);
+  // selectionSortLinkedText(&lt, &metric);
+  // filePrintLinkedText(stdout, lt);
+
+  // filePrintMetric(metric);
+
+  // linkedTextFree(&lt);
+
   return 0;
 }

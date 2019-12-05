@@ -14,14 +14,9 @@
 
 #include "../../libmetric/includes/metric.h"
 
-/* void _partitionBookVector(Book *arr, int l, int r, int *i, int *j);
-void _partitionTextVector(Text *arr, int l, int r, int *i, int *j);
-void _partitionLinkedBook(LinkedBook *linkedBook, int l, int r, int *i, int *j);
-void _partitionLinkedText(LinkedText *linkedText, int l, int r, int *i, int *j);
-*/
 void quickSortVectorBook(VectorBook *book, int l, int r, Metric *metric);
 void quickSortVectorText(VectorText *text, int l, int r, Metric *metric);
-void quickSortLinkedBook(LinkedBook *lb, int l, int r, Metric *metric);
-void quickSortLinkedText(LinkedText *lt, int l, int r, Metric *metric);
+void quickSortLinkedBook(LinkedBook *lb, Metric *metric);
+void quickSortLinkedText(LinkedText *lt, Metric *metric);
 
 #endif

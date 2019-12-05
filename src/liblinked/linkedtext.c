@@ -20,13 +20,13 @@ void linkedTextInit(LinkedText *lt) {
 
 void linkedTextInsert(LinkedText *lt, LinkedWord tn) {
   TextNode new = create(tn);
-  TextNode last = lt->tail;
   if (isEmpty(*lt)) {
     lt->head = new;
   } else {
-    new->prev = last;
-    last->next = new;
+    new->prev = lt->tail;
+    lt->tail->next = new;
   }
+  new->index = lt->size;
   lt->tail = new;
   lt->size++;
 }
@@ -77,9 +77,8 @@ void linkedTextSwap(LinkedText *lt, TextNode a, TextNode b) {
   if(pb != NULL) pb->next = a;
   else lt->head = a;
   
-  if(nb != NULL) pb->prev = a;
+  if(nb != NULL) nb->prev = a;
   else lt->tail = a;
-
 
   temp = a->next;
   a->next = b->next;
@@ -88,6 +87,10 @@ void linkedTextSwap(LinkedText *lt, TextNode a, TextNode b) {
   temp = a->prev;
   a->prev = b->prev;
   b->prev = temp;
+
+  int indexAux = a->index;
+  a->index = b->index;
+  b->index = indexAux;
 }
 
 void linkedTextFree(LinkedText *lt) {

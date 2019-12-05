@@ -69,68 +69,62 @@ static void _partitionTextVector(VectorText *arr, int l, int r, int *i, int *j, 
   } while (*i <= *j);
 }
 
-static void _partitionLinkedBook(LinkedBook *linkedBook, int l, int r, int *i, int *j, Metric *metric) {
-  *i = l;
-  *j = r;
+static void _partitionLinkedBook(LinkedBook *linkedBook, BookNode *head, BookNode *tail, Metric *metric) {
 
-  LinkedText pivo = linkedBookGet(*linkedBook, ((*i + *j)/2))->lt;
+  BookNode pivo = linkedBook->head;
 
   do {
-    while (linkedTextSize(pivo) > linkedTextSize(linkedBookGet(*linkedBook, *i)->lt)) {
-      (*i)++;
-      metricSetComparisons(metric, metricGetComparisons(metric) + 1);
-    }
-
-    while (linkedTextSize(pivo) < linkedTextSize(linkedBookGet(*linkedBook, *j)->lt)) { 
-      (*j)--;
-      metricSetComparisons(metric, metricGetComparisons(metric) + 1);
-    }
-    
-    if (*i <= *j) {
-      linkedBookSwap(linkedBook, *i, *j);
-
-      (*i)++;
-      (*j)--;
-      metricSetMoves(metric, metricGetMoves(metric) + 1); // swap move
-    }
-
-    metricSetComparisons(metric, metricGetComparisons(metric) + 4); //break conditions + comparison inside while
-    
-  } while (*i <= *j);
-}
-
-static void _partitionLinkedText(LinkedText *linkedText, int l, int r, int *i, int *j, Metric *metric) {
-  *i = l;
-  *j = r;
-
-  WordNode pivo = linkedText->head;
-  WordNode itI;
-  WordNode itJ;
-  // linkedTextGet(*linkedText, ((*i + *j)/2))->lw;
-
-  do {
-    while (tolower(pivo->c) > tolower(linkedTextGet(*linkedText, *i)->lw->c)) {
+    while (pivo->lt.size > (*head)->lt.size) {
       metricSetComparisons(metric, metricGetComparisons(metric) + 1); 
-      (*i)++;
+      *head = (*head)->next;
     } 
     
-    while (tolower(pivo->c) < tolower(linkedTextGet(*linkedText, *j)->lw->c)) {
-      (*j)--;
+    while (pivo->lt.size < (*tail)->lt.size) {
+      *tail = (*tail)->prev;
       metricSetComparisons(metric, metricGetComparisons(metric) + 1); 
     }
 
-    if (*i <= *j) {
-      linkedTextSwap(linkedText, *i, *j);
+    if ((*head)->index <= (*tail)->index) {
+      // linkedBookSwap(linkedBook, *head, *tail);
 
-      (*i)++;
-      (*j)--;
+      *head = (*head)->next;
+      *tail = (*tail)->prev;
       
       metricSetMoves(metric, metricGetMoves(metric) + 1); // swap move
     }
     
     metricSetComparisons(metric, metricGetComparisons(metric) + 4); //break conditions + comparison inside while
 
-  } while (*i <= *j);  
+  } while ((*head)->index <= (*tail)->index); 
+}
+
+static void _partitionLinkedText(LinkedText *linkedText, TextNode *head, TextNode *tail, Metric *metric) {
+
+  TextNode pivo = linkedText->head;
+
+  do {
+    while (tolower(pivo->lw.head->c) > tolower((*head)->lw.head->c)) {
+      metricSetComparisons(metric, metricGetComparisons(metric) + 1); 
+      *head = (*head)->next;
+    } 
+    
+    while (tolower(pivo->lw.head->c) < tolower((*tail)->lw.head->c)) {
+      *tail = (*tail)->prev;
+      metricSetComparisons(metric, metricGetComparisons(metric) + 1); 
+    }
+
+    if ((*head)->index <= (*tail)->index) {
+      linkedTextSwap(linkedText, *head, *tail);
+
+      *head = (*head)->next;
+      *tail = (*tail)->prev;
+      
+      metricSetMoves(metric, metricGetMoves(metric) + 1); // swap move
+    }
+    
+    metricSetComparisons(metric, metricGetComparisons(metric) + 4); //break conditions + comparison inside while
+
+  } while ((*head)->index <= (*tail)->index);  
 }
 
 void quickSortVectorBook(VectorBook *book, int l, int r, Metric *metric) {
@@ -147,16 +141,28 @@ void quickSortVectorText(VectorText *text, int l, int r, Metric *metric) {
   if (i < r) quickSortVectorText(text, i, r, metric);
 }
 
-void quickSortLinkedBook(LinkedBook *lb, int l, int r, Metric *metric) {
-  int i, j;
-  _partitionLinkedBook(lb, l, r, &i, &j, metric);
-  if (l < j) quickSortLinkedBook(lb, l, j, metric);
-  if (i < r) quickSortLinkedBook(lb, i, r, metric);
+void quickSortLinkedBook(LinkedBook *lb, Metric *metric) {
+  LinkedBook interval;
+  _partitionLinkedBook(lb, &(interval.head), &(interval.tail), metric);
+  
+  metricSetComparisons(metric, metricGetComparisons(metric) + 2);
+
+  if (lb->head->index < interval.tail->index) 
+    quickSortLinkedBook(&interval, metric);
+  
+  if (interval.head->index < lb->tail->index) 
+    quickSortLinkedBook(&interval, metric);
 }
 
-void quickSortLinkedText(LinkedText *lt, int l, int r, Metric *metric) {
-  int i, j;
-  _partitionLinkedText(lt, l, r, &i, &j, metric);
-  if (l < j) quickSortLinkedText(lt, l, j, metric);
-  if (i < r) quickSortLinkedText(lt, i, r, metric);
+void quickSortLinkedText(LinkedText *lt, Metric *metric) {
+  LinkedText interval;
+  _partitionLinkedText(lt, &(interval.head), &(interval.tail), metric);
+  
+  metricSetComparisons(metric, metricGetComparisons(metric) + 2);
+
+  if (lt->head->index < interval.tail->index) 
+    quickSortLinkedText(&interval, metric);
+  
+  if (interval.head->index < lt->tail->index) 
+    quickSortLinkedText(&interval, metric);
 }

@@ -9,6 +9,7 @@ struct text_t {
   LinkedWord lw;
   TextNode next;
   TextNode prev;
+  int index;
 };
 
 typedef struct {

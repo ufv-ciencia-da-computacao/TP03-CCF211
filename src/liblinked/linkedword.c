@@ -28,6 +28,7 @@ void linkedWordInsert(LinkedWord *lw, char c) {
     new->prev = last;
     last->next = new;
   }
+  new->index = lw->size;
   lw->tail = new;
   lw->size++;
 }
@@ -77,9 +78,8 @@ void linkedWordSwap(LinkedWord *lw, WordNode a, WordNode b) {
   if(pb != NULL) pb->next = a;
   else lw->head = a;
   
-  if(nb != NULL) pb->prev = a;
+  if(nb != NULL) nb->prev = a;
   else lw->tail = a;
-
 
   temp = a->next;
   a->next = b->next;

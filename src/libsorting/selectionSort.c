@@ -1,4 +1,5 @@
 #include "./includes/selectionSort.h"
+#include <stdio.h>
 
 void selectionSortVectorBook(VectorBook *arr, Metric *metric) {
   int min;
@@ -40,29 +41,31 @@ void selectionSortVectorText(VectorText *arr, Metric *metric) {
   } 
 }
 
-void selectionSortLinkedText(LinkedText linkedText, Metric *metric) {
+void selectionSortLinkedText(LinkedText *linkedText, Metric *metric) {
   TextNode itI, itJ;
   TextNode min;
 
-  for (itI = linkedText.head; itI->next != NULL; itI = itI->next) {
+  for (itI = linkedText->head; itI->next != NULL; itI = min->next) {
     min = itI;
     for (itJ = itI->next; itJ != NULL; itJ = itJ->next) {
-      if (tolower(itI->lw.head->c) < tolower(itJ->lw.head->c)) {
+      if (tolower(itJ->lw.head->c) < tolower(min->lw.head->c)) {
         min = itJ;
       }
       metricSetComparisons(metric, metricGetComparisons(metric) + 1);
     }
-
-    linkedTextSwap(&linkedText, itI, min);
-    metricSetMoves(metric, metricGetMoves(metric) + 1); // swap move
+    if (min != linkedText->head) {
+      linkedTextSwap(linkedText, itI, min);
+    }
+    
+    metricSetMoves(metric, metricGetMoves(metric) + 1);
   } 
 }
 
-void selectionSortLinkedBook(LinkedBook linkedBook, Metric *metric) {
+void selectionSortLinkedBook(LinkedBook *linkedBook, Metric *metric) {
   BookNode min;
   BookNode itI, itJ;
 
-  for (itI = linkedBook.head; itI->next != NULL; itI = itI->next) {
+  for (itI = linkedBook->head; itI->next != NULL; itI = itI->next) {
     min = itI;
     for (itJ = itI->next; itJ != NULL; itJ = itJ->next) {
       if (itJ->lt.size < min->lt.size) {
@@ -70,8 +73,7 @@ void selectionSortLinkedBook(LinkedBook linkedBook, Metric *metric) {
       }
       metricSetComparisons(metric, metricGetComparisons(metric) + 1);
     }
-
-    linkedBookSwap(&linkedBook, itI, min);
+    linkedBookSwap(linkedBook, itI, min);
     metricSetMoves(metric, metricGetMoves(metric) + 1); // swap move
   } 
 }

@@ -27,6 +27,7 @@ void linkedBookInsert(LinkedBook *lb, LinkedText lt) {
     new->prev = last;
     last->next = new;
   }
+  new->index = lb->size;
   lb->tail = new;
   lb->size++;
 }
@@ -77,7 +78,7 @@ void linkedBookSwap(LinkedBook *lb, BookNode a, BookNode b) {
   if(pb != NULL) pb->next = a;
   else lb->head = a;
   
-  if(nb != NULL) pb->prev = a;
+  if(nb != NULL) nb->prev = a;
   else lb->tail = a;
 
 
@@ -88,6 +89,10 @@ void linkedBookSwap(LinkedBook *lb, BookNode a, BookNode b) {
   temp = a->prev;
   a->prev = b->prev;
   b->prev = temp;
+
+  int indexAux = a->index;
+  a->index = b->index;
+  b->index = indexAux;
 }
 
 void linkedBookFree(LinkedBook *lb) {

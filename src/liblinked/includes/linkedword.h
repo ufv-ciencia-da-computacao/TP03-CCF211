@@ -8,6 +8,7 @@ struct word_t {
   char c;
   WordNode next;
   WordNode prev;
+  int index;
 };
 
 typedef struct {

@@ -9,6 +9,7 @@ struct book_t {
   LinkedText lt;
   BookNode next;
   BookNode prev;
+  int index;
 };
 
 typedef struct {
